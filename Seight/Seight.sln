@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Seight", "Seight\Seight.vcxproj", "{DA355A7B-2E54-4D58-BAC6-7C25AF988707}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Seight", "Seight\Seight.vcxproj", "{B8C4759D-C075-48BC-BCD5-C940994E7B08}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Win32 = Release|Win32
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA355A7B-2E54-4D58-BAC6-7C25AF988707}.Debug|Win32.ActiveCfg = Debug|Win32
-		{DA355A7B-2E54-4D58-BAC6-7C25AF988707}.Debug|Win32.Build.0 = Debug|Win32
-		{DA355A7B-2E54-4D58-BAC6-7C25AF988707}.Release|Win32.ActiveCfg = Release|Win32
-		{DA355A7B-2E54-4D58-BAC6-7C25AF988707}.Release|Win32.Build.0 = Release|Win32
+		{B8C4759D-C075-48BC-BCD5-C940994E7B08}.Debug|Win32.ActiveCfg = Debug|Win32
+		{B8C4759D-C075-48BC-BCD5-C940994E7B08}.Debug|Win32.Build.0 = Debug|Win32
+		{B8C4759D-C075-48BC-BCD5-C940994E7B08}.Release|Win32.ActiveCfg = Release|Win32
+		{B8C4759D-C075-48BC-BCD5-C940994E7B08}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
