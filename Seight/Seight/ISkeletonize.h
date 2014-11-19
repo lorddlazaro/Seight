@@ -1,7 +1,7 @@
 #ifndef ISkeletonize_H
 #define ISkeletonize_H
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <vector>
 
 using namespace std;
