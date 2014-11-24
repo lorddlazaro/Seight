@@ -64,10 +64,14 @@ void ISkeletonize::thinning(cv::Mat& im)
     im *= 255;
 }
 
-void ISkeletonize::perform(Mat img) //vector<int>
+Mat ISkeletonize::perform(Mat img) //vector<int>
 {
     thinning(img);
     bitwise_not(img, img);
     imshow("skeletonization", img);
+    
+    return img;
+    
+    //returns skeleton; should be passed through gaussian blur, grayscaled and threshold
 }
 

@@ -14,7 +14,7 @@ class ISkeletonize
 public:
 	ISkeletonize();
 	~ISkeletonize();
-	void perform(Mat img); //vector<int>
+	Mat perform(Mat img); //vector<int>
     void thinningIteration(Mat& im, int iter);
     void thinning(Mat& im);
 };
