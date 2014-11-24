@@ -26,4 +26,6 @@ Mat IFilter::perform(Mat img)
     cv::threshold(bw, bw, 200, 250, CV_THRESH_OTSU);
     
     return bw;
+    
+    //bw would be the input for skeletonization and edge detection
 }
