@@ -10,8 +10,9 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
     PlantModeler::correction->perform();
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
     PlantModeler::imageFiltering->perform(image);
-    PlantModeler::edgeDetection->perform(segmentedImage);
-    PlantModeler::skeletonization->perform(segmentedImage);
+    Mat sobel = PlantModeler::edgeDetection->perform(segmentedImage);
+    Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
+    PlantModeler::structure->perform(sobel, skeleton);
     PlantModeler::countTiller();
     PlantModeler::measureHeight();
     cout << "done processing" << endl;

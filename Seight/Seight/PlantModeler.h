@@ -33,6 +33,7 @@ private:
     IFilter *imageFiltering;
     IEdgeDetect *edgeDetection;
     ISkeletonize *skeletonization;
+    IPlantStructure *structure;
     int countTiller(); //Update return type and parameters based on what is needed
     double measureHeight(); //Update return type and parameters based on what is needed
     
@@ -58,6 +59,7 @@ public:
                 plantModeler->imageFiltering = new defaultFilter;
                 plantModeler->edgeDetection = new SobelEdgeDetect;
                 plantModeler->skeletonization = new defaultSkeletonize;
+                plantModeler->structure = new PlantStructure;
                 cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:
