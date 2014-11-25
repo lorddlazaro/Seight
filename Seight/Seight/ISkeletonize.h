@@ -16,8 +16,8 @@ public:
 	ISkeletonize();
 	~ISkeletonize();
 
-	virtual void perform(Mat image); //vector<int>
-	//Mat perform(Mat img); //vector<int>
+	//virtual void perform(Mat image); //vector<int>
+	Mat perform(Mat img); //vector<int>
     void thinningIteration(Mat& im, int iter);
     void thinning(Mat& im);
 
