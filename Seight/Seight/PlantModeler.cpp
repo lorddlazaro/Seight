@@ -8,10 +8,11 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
 {
 	cout << "processing image" << endl;
 	PlantModeler::correction->perform();
-	PlantModeler::segmentation->perform(image);
+	Mat segmentedImage = PlantModeler::segmentation->perform(image);
 	PlantModeler::imageFiltering->perform();
-	PlantModeler::edgeDetection->perform();
-	PlantModeler::skeletonization->perform();
+	PlantModeler::edgeDetection->perform(segmentedImage);
+	PlantModeler::skeletonization->perform(segmentedImage);
+	cout << "done processing" << endl;
 }
 
 PlantModeler::PlantModeler()

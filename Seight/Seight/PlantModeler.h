@@ -6,6 +6,7 @@
 
 #include "ISegment.h"
 #include "defaultSegment.h"
+#include "HSVSegment.h"
 
 #include "IPerspectiveCorrect.h"
 #include "defaultPerspectiveCorrect.h"
@@ -51,7 +52,7 @@ public:
 		switch (approach)
 		{
 		case PlantModeler::APPROACH_A:
-			plantModeler->segmentation = new defaultSegment;
+			plantModeler->segmentation = new HSVSegment;
 			plantModeler->correction = new defaultPerspectiveCorrect;
 			plantModeler->imageFiltering = new defaultFilter;
 			plantModeler->edgeDetection = new defaultEdgeDetect;

@@ -75,6 +75,9 @@
     <ClInclude Include="defaultSkeletonize.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HSVSegment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -132,6 +135,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="defaultSkeletonize.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HSVSegment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

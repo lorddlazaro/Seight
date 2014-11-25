@@ -11,7 +11,7 @@ IEdgeDetect::~IEdgeDetect()
 {
 }
 
-void IEdgeDetect::perform() //vector<int> 
+void IEdgeDetect::perform(Mat image) //vector<int> 
 {
 
 }

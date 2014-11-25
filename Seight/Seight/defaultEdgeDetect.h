@@ -10,7 +10,8 @@ class defaultEdgeDetect : public IEdgeDetect
 public:
 	defaultEdgeDetect();
 	~defaultEdgeDetect();
-	void perform();
+	//void thresh_callback(int value, void* userdata);
+	void perform(Mat image);
 };
 
 #endif defaultEdgeDetect_H
