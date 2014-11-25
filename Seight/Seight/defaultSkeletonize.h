@@ -10,7 +10,7 @@ class defaultSkeletonize : public ISkeletonize
 public:
 	defaultSkeletonize();
 	~defaultSkeletonize();
-	void perform(Mat image);
+	Mat perform(Mat image);
 	void thinning(Mat& im);
 	void thinningIteration(Mat& im, int iter);
 };

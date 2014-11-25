@@ -78,6 +78,9 @@
     <ClInclude Include="HSVSegment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="SobelEdgeDetect.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -138,6 +141,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="HSVSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SobelEdgeDetect.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -1,7 +1,7 @@
 #ifndef ISkeletonize_H
 #define ISkeletonize_H
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <vector>
 #include <iostream>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -16,11 +16,7 @@ public:
 	ISkeletonize();
 	~ISkeletonize();
 
-	//virtual void perform(Mat image); //vector<int>
-	Mat perform(Mat img); //vector<int>
-    void thinningIteration(Mat& im, int iter);
-    void thinning(Mat& im);
-
+	virtual Mat perform(Mat img); //vector<int>
 };
 
 #endif

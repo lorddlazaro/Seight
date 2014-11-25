@@ -14,9 +14,7 @@ class IEdgeDetect
 public:
 	IEdgeDetect();
 	~IEdgeDetect();
-	//virtual void perform(Mat image); //vector<int>
-    Mat sobelEdge(Mat bw);
-	virtual Mat perform(Mat img); //vector<int>
+	virtual Mat perform(Mat image);
 };
 
 #endif

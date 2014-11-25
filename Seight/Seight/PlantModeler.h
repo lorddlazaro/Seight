@@ -16,6 +16,7 @@
 
 #include "IEdgeDetect.h"
 #include "defaultEdgeDetect.h"
+#include "SobelEdgeDetect.h"
 
 #include "ISkeletonize.h"
 #include "defaultSkeletonize.h"
@@ -55,7 +56,7 @@ public:
 			plantModeler->segmentation = new HSVSegment;
 			plantModeler->correction = new defaultPerspectiveCorrect;
 			plantModeler->imageFiltering = new defaultFilter;
-			plantModeler->edgeDetection = new defaultEdgeDetect;
+			plantModeler->edgeDetection = new SobelEdgeDetect;
 			plantModeler->skeletonization = new defaultSkeletonize;
 			cout << "in approach A" << endl;
 			break;

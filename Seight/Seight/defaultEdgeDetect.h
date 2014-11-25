@@ -11,7 +11,7 @@ public:
 	defaultEdgeDetect();
 	~defaultEdgeDetect();
 	//void thresh_callback(int value, void* userdata);
-	void perform(Mat image);
+	Mat perform(Mat image);
 };
 
 #endif defaultEdgeDetect_H

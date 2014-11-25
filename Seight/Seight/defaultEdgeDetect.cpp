@@ -13,12 +13,12 @@ defaultEdgeDetect::~defaultEdgeDetect()
 {
 }
 
-Mat src_gray; Mat src;
+Mat src_gray; Mat src; Mat result;
 int thresh = 50;
 int max_thresh = 255;
 RNG rng(12345);
 
-void thresh_callback(int value, void* userdata)
+void thresh_callback(int value, void *userdata)
 {
 	Mat canny_output;
 	vector<vector<Point> > contours;
@@ -42,14 +42,14 @@ void thresh_callback(int value, void* userdata)
 	//imshow("Contours", drawing);
 
 	imwrite("image/edgeDetect_Draw.JPG", drawing, vector < int > {0});
-	Mat result;
+
 	//drawing.copyTo(result, src);
 	result = src + drawing;
 	imwrite("image/result_Canny.JPG", result, vector < int > {0});
 }
 
 
-void defaultEdgeDetect::perform(Mat image)
+Mat defaultEdgeDetect::perform(Mat image)
 {
 	cout << "perform edge detection" << endl;
 	src = image;
@@ -66,6 +66,8 @@ void defaultEdgeDetect::perform(Mat image)
 	thresh_callback(0, 0);
 
 	//waitKey(0);
+
+	return result;
 }
 
 

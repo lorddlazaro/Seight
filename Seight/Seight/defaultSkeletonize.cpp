@@ -13,7 +13,7 @@ defaultSkeletonize::~defaultSkeletonize()
 {
 }
 
-void defaultSkeletonize::perform(Mat image)
+Mat defaultSkeletonize::perform(Mat image)
 {
 	cout << "perform skeletonization" << endl;
 
@@ -27,6 +27,7 @@ void defaultSkeletonize::perform(Mat image)
 
 	imwrite("image/result_ZhangSuen.JPG", bw, vector < int > {0});
 
+	return bw;
 }
 
 void defaultSkeletonize::thinningIteration(Mat& im, int iter)
