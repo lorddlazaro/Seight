@@ -36,9 +36,6 @@ Mat SobelEdgeDetect::sobelEdge(Mat image){
 	int ddepth = CV_16S;
 	Mat grad;
     
-    GaussianBlur(image, image, Size(3,3), 0, 0, BORDER_DEFAULT );
-    //imshow("Blur", image);
-    
     cvtColor(image, image, CV_BGR2GRAY);
     //cv::imshow("gray", bw);
     

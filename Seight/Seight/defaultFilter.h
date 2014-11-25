@@ -10,7 +10,7 @@ class defaultFilter : public IFilter
 public:
 	defaultFilter();
 	~defaultFilter();
-	void perform();
+	void perform(Mat image);
 };
 
 #endif

@@ -34,17 +34,16 @@ private:
     IEdgeDetect *edgeDetection;
     ISkeletonize *skeletonization;
     IPlantStructure *structure;
-    int countTiller(); //Update return type and parameters based on what is needed
+    int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(); //Update return type and parameters based on what is needed
     
 public:
-    
+    PlantModeler();
+    ~PlantModeler();
     enum Approach
     {
         APPROACH_A, APPROACH_B, APPROACH_C //rename to more descriptive identifiers
     };
-    PlantModeler();
-    ~PlantModeler();
     void processImage(Mat image); //PhenotypicData
     static PlantModeler createApproach(Approach approach)
     {
