@@ -6,7 +6,7 @@ using namespace std;
 
 Plant::Plant()
 {
-	cout << "I am a new plant" << endl;
+	//cout << "I am a new plant" << endl;
 }
 
 Plant::~Plant()

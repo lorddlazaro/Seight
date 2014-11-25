@@ -24,15 +24,7 @@ IPlantStructure::~IPlantStructure()
 
 Mat IPlantStructure::perform(Mat sk, Mat ed)
 {
-    double alpha = 0.5;
-    double beta;
-    Mat es;
+    Mat structure;
     
-    beta = 1.0-alpha;
-    addWeighted(ed, alpha, sk, beta, 0.0, es);
-    
-    imshow("Edge plus Skeleton", es);
-    imwrite("/Users/pauletteconstantino/THESIS/COMBINED.jpg", es);
-    
-    return es;
+    return structure;
 }

@@ -13,4 +13,4 @@ public:
 	void perform();
 };
 
-#endif defaultFilter_H
+#endif

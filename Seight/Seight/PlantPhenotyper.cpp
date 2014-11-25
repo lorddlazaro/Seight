@@ -23,7 +23,7 @@ PlantPhenotyper::~PlantPhenotyper()
 int PlantPhenotyper::phenotype()
 {
 	Mat image;
-	image = imread("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/IR64-009_NoRuler.JPG", CV_LOAD_IMAGE_COLOR);   // Read the file
+	image = imread("/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/IR64-009_NoRuler.JPG", CV_LOAD_IMAGE_COLOR);   // Read the file
 
 	if (!image.data)                              // Check for invalid input
 	{

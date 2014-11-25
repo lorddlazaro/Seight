@@ -15,7 +15,7 @@ class ISegment
 public:
 	ISegment();
 	~ISegment();
-	virtual Mat ISegment::perform(Mat image); //vector<Point> perform(&Mat);
+	virtual Mat perform(Mat image); //vector<Point> perform(&Mat);
 };
 
 #endif

@@ -25,4 +25,4 @@ public:
 };
 
 
-#endif /* defined(__Seight__IPlantStructure__) */
+#endif /* defined(IPlantStructure_H) */
