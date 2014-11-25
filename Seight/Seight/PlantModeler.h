@@ -33,8 +33,8 @@ private:
 	IFilter *imageFiltering;
 	IEdgeDetect *edgeDetection;
 	ISkeletonize *skeletonization;
-	
-	
+	int countTiller(); //Update return type and parameters based on what is needed
+	double measureHeight(); //Update return type and parameters based on what is needed
 	
 public:
 	

@@ -12,6 +12,8 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
 	PlantModeler::imageFiltering->perform(image);
 	PlantModeler::edgeDetection->perform(segmentedImage);
 	PlantModeler::skeletonization->perform(segmentedImage);
+	PlantModeler::countTiller();
+	PlantModeler::measureHeight();
 	cout << "done processing" << endl;
 }
 
@@ -23,4 +25,14 @@ PlantModeler::PlantModeler()
 PlantModeler::~PlantModeler()
 {
 
+}
+
+int PlantModeler::countTiller()
+{
+	return 0;
+}
+
+double PlantModeler::measureHeight()
+{
+	return 0.0;
 }
