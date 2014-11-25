@@ -43,8 +43,8 @@ public:
     {
         APPROACH_A, APPROACH_B, APPROACH_C //rename to more descriptive identifiers
     };
-    ~PlantModeler();
     PlantModeler();
+    ~PlantModeler();
     void processImage(Mat image); //PhenotypicData
     static PlantModeler createApproach(Approach approach)
     {
