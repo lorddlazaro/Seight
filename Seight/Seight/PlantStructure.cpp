@@ -33,8 +33,9 @@ Mat PlantStructure::perform(Mat skeleton, Mat edge)
     beta = 1.0-alpha;
     addWeighted(edge, alpha, skeleton, beta, 0.0, structure);
     
-    imshow("Edge plus Skeleton", structure);
-    waitKey(0);
+    //imshow("Edge plus Skeleton", structure);
+    //waitKey(0);
+    //imwrite("/Users/pauletteconstantino/THESIS/structure2.JPG", structure);
     
     return structure;
 }

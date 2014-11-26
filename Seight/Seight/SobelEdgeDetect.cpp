@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "SobelEdgeDetect.h"
+//#include "defaultFilter.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -13,8 +14,8 @@ SobelEdgeDetect::SobelEdgeDetect()
 }
 
 
-SobelEdgeDetect::~SobelEdgeDetect()
-{
+SobelEdgeDetect::~SobelEdgeDetect(){
+    
 }
 
 Mat SobelEdgeDetect::perform(Mat image)
@@ -35,6 +36,11 @@ Mat SobelEdgeDetect::sobelEdge(Mat image){
 	int delta = 0;
 	int ddepth = CV_16S;
 	Mat grad;
+    
+    //defaultFilter::perform(image);
+    
+    //cv::imshow("To be edge detected", image);
+    //waitKey(0);
     
     cvtColor(image, image, CV_BGR2GRAY);
     //cv::imshow("gray", bw);

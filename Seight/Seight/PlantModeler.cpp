@@ -9,10 +9,11 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
     cout << "processing image" << endl;
     PlantModeler::correction->perform();
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
-    PlantModeler::imageFiltering->perform(image);
+    PlantModeler::imageFiltering->perform(segmentedImage);
     Mat sobel = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
     Mat ps = PlantModeler::structure->perform(sobel, skeleton);
+    //PlantModeler::tillerCount.perform(ps);
     PlantModeler::countTiller(ps);
     PlantModeler::measureHeight();
     cout << "done processing" << endl;
@@ -23,32 +24,42 @@ PlantModeler::PlantModeler()
     cout << "PlantModeler constructed... " << endl;
 }
 
-PlantModeler::~PlantModeler()
-{
+PlantModeler::~PlantModeler(){
     
 }
 
-int PlantModeler::countTiller(Mat image)
+void traceUp(int x, int y, unsigned char *input, Mat image){
+    int pixelCount = 0;
+    int b, g, r;
+    
+    do {
+        b = input[image.step * x + y];
+        g = input[image.step * x + y +1];
+        r = input[image.step * x + y + 2];
+    } while (b == 0 && g == 0 && r == 0);
+}
+
+int TillerCount::perform(Mat image) //vector<int>
 {
-    int x,y,b,g,r;
+    cout << "Tiller counting" << endl;
+    
+    int x,y,b,g,r, tillerCount=0;
+    x = 0;
+    y = image.rows;
     
     unsigned char *input = (unsigned char*)(image.data);
     
-    for (y=image.rows; y>=0; y--) {
-        for (x=0; x<image.cols; x++) {
-            b = input[image.step * x + y];
-            g = input[image.step * x + y +1];
-            r = input[image.step * x + y + 2];
-            
-            if(b == 255 && g == 255 && r == 255){
-                printf("Black\n");
-                printf("X is %d Y is %d\n", x, y);
-                
-            }
+    do {
+        b = input[image.step * x + y];
+        g = input[image.step * x + y +1];
+        r = input[image.step * x + y + 2];
+        
+        if(b == 0 && g == 0 && r == 0){
+            traceUp(x, y, input, image);
         }
-    }
+    } while (x<image.cols && y>=0);
     
-    return 0;
+    return tillerCount;
 }
 
 double PlantModeler::measureHeight()

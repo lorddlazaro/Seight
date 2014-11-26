@@ -21,6 +21,11 @@
 #include "ISkeletonize.h"
 #include "defaultSkeletonize.h"
 
+#include "IPlantStructure.h"
+#include "PlantStructure.h"
+
+#include "TillerCount.h"
+
 #include <iostream>
 
 using namespace std;
@@ -34,6 +39,7 @@ private:
     IEdgeDetect *edgeDetection;
     ISkeletonize *skeletonization;
     IPlantStructure *structure;
+    //TillerCount tillerCount;
     int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(); //Update return type and parameters based on what is needed
     
@@ -56,9 +62,10 @@ public:
                 plantModeler->segmentation = new HSVSegment;
                 plantModeler->correction = new defaultPerspectiveCorrect;
                 plantModeler->imageFiltering = new defaultFilter;
-                plantModeler->edgeDetection = new SobelEdgeDetect;
+                plantModeler->edgeDetection = new defaultEdgeDetect;
                 plantModeler->skeletonization = new defaultSkeletonize;
                 plantModeler->structure = new PlantStructure;
+                
                 cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:

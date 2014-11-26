@@ -22,10 +22,12 @@ Mat defaultSkeletonize::perform(Mat image)
 	threshold(bw, bw, 10, 255, CV_THRESH_BINARY);
 
 	thinning(bw);
+    bitwise_not(bw, bw);
 
 	//imshow("Thinning", bw);
+    //waitKey(0);
 
-	imwrite("image/result_ZhangSuen.JPG", bw, vector < int > {0});
+	imwrite("/image/result_ZhangSuen.JPG", bw, vector < int > {0});
 
 	return bw;
 }
