@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Seight Team. All rights reserved.
 //
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "IPlantStructure.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>

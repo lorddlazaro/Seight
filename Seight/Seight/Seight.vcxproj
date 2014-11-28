@@ -92,6 +92,7 @@
     <ClInclude Include="IFilter.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="IPerspectiveCorrect.h" />
+    <ClInclude Include="IPlantStructure.h" />
     <ClInclude Include="ISegment.h" />
     <ClInclude Include="ISkeletonize.h" />
     <ClInclude Include="PhenotypicData.h" />
@@ -99,10 +100,12 @@
     <ClInclude Include="PlantDAO.h" />
     <ClInclude Include="PlantModeler.h" />
     <ClInclude Include="PlantPhenotyper.h" />
+    <ClInclude Include="PlantStructure.h" />
     <ClInclude Include="SobelEdgeDetect.h" />
     <ClInclude Include="SQLPlantDAO.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TillerCount.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="defaultEdgeDetect.cpp" />
@@ -115,12 +118,14 @@
     <ClCompile Include="IFilter.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="IPerspectiveCorrect.cpp" />
+    <ClCompile Include="IPlantStructure.cpp" />
     <ClCompile Include="ISegment.cpp" />
     <ClCompile Include="ISkeletonize.cpp" />
     <ClCompile Include="PhenotypicData.cpp" />
     <ClCompile Include="Plant.cpp" />
     <ClCompile Include="PlantModeler.cpp" />
     <ClCompile Include="PlantPhenotyper.cpp" />
+    <ClCompile Include="PlantStructure.cpp" />
     <ClCompile Include="Seight.cpp" />
     <ClCompile Include="PlantDAO.cpp" />
     <ClCompile Include="SobelEdgeDetect.cpp" />
@@ -129,6 +134,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TillerCount.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

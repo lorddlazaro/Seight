@@ -24,8 +24,8 @@ Mat HSVSegment::perform(Mat image)
 	//imshow("HSV", hsvImage);
 
 	//define range of green color in HSV
-	Scalar green_min = Scalar(30, 50, 50);//(70, 100, 30);
-	Scalar green_max = Scalar(80, 255, 255);//(115, 255, 50);
+	Scalar green_min = Scalar(30, 70, 78);//30, 50, 50 (70, 100, 30);
+	Scalar green_max = Scalar(80, 250, 255);//(115, 255, 50);
 
 	Mat mask;
 	

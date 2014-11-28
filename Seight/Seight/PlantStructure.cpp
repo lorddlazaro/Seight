@@ -5,7 +5,7 @@
 //  Created by Paulette Constantino on 11/26/14.
 //  Copyright (c) 2014 Seight Team. All rights reserved.
 //
-
+#include "stdafx.h"
 #include "PlantStructure.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>

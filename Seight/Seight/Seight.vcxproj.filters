@@ -81,6 +81,15 @@
     <ClInclude Include="SobelEdgeDetect.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PlantStructure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TillerCount.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IPlantStructure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -144,6 +153,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SobelEdgeDetect.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="PlantStructure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TillerCount.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IPlantStructure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

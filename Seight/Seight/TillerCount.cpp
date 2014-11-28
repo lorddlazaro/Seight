@@ -27,7 +27,7 @@ TillerCount::~TillerCount()
 bool trace(int x, int y, unsigned char *input, Mat image){
     int pixelCount = 0;
     int b, g, r;
-    bool isTiller;
+	bool isTiller = false;
     
     do {
         b = input[image.step * x + y];
@@ -59,6 +59,8 @@ int countTillers(Mat image){
             }
         }
     } while (x<image.cols && y>=0);
+
+	return tiller;
 }
 
 
