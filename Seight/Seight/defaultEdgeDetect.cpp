@@ -23,6 +23,7 @@ void thresh_callback(int value, void *userdata)
 	Mat canny_output;
 	vector<vector<Point> > contours;
 	vector<Vec4i> hierarchy;
+    vector<Point> approx;
 
 	/// Detect edges using canny
 	Canny(src_gray, canny_output, thresh, thresh * 2, 3);
@@ -33,15 +34,20 @@ void thresh_callback(int value, void *userdata)
 	Mat drawing = Mat::zeros(canny_output.size(), CV_8UC3);
 	for (int i = 0; i< contours.size(); i++)
 	{
-		Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-		drawContours(drawing, contours, i, color, 1, 8, hierarchy, 0, Point());
-	}
+        approxPolyDP(Mat(contours[i]), approx, arcLength(Mat(contours[i]), true) * 0.02, true);
+        
+        if (fabs(contourArea(contours[i])) > 100 || !isContourConvex(approx)){
+            Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+            drawContours(drawing, contours, i, color, 1, 8, hierarchy, 0, Point());
+        }
+    }
 
 	/// Show in a window
 	//namedWindow("Contours", CV_WINDOW_AUTOSIZE);
 	//imshow("Contours", drawing);
 
 	imwrite("image/edgeDetect_Draw.JPG", drawing, vector < int > {0});
+    imwrite("/Users/pauletteconstantino/THESIS/structure2.JPG", drawing, vector < int > {0});
 
 	//drawing.copyTo(result, src);
 	result = src + drawing;

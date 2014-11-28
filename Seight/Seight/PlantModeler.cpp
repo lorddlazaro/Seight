@@ -13,7 +13,7 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
     Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
     //Mat ps = PlantModeler::structure->perform(edge, skeleton);
-    PlantModeler::tillerCount->perform(edge);
+    //PlantModeler::tillerCount->perform(edge);
     //PlantModeler::countTiller(ps);
     PlantModeler::measureHeight();
     cout << "done processing" << endl;

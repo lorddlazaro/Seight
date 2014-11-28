@@ -59,9 +59,8 @@ int countTillers(Mat image){
             }
         }
     } while (x<image.cols && y>=0);
-    
-    return tiller;
 }
+
 
 int TillerCount::perform(Mat image) //vector<int>
 {
