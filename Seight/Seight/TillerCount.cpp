@@ -24,7 +24,7 @@ TillerCount::~TillerCount()
 {
 }
 
-bool trace(int x, int y, unsigned char *input, Mat image){
+/*bool trace(int x, int y, unsigned char *input, Mat image){
     int pixelCount = 0;
     int b, g, r;
     bool isTiller;
@@ -38,10 +38,10 @@ bool trace(int x, int y, unsigned char *input, Mat image){
     return isTiller;
     
     //isTiller true if at least 30 pixels
-}
+}*/
 
-int countTillers(Mat image){
-    int x,y,b,g,r, tiller=0;
+void countTillers(Mat image){
+    int x,y,b,g,r, tiller=0, startX, startY, currX, currY;
     
     x = 0;
     y = image.rows;
@@ -53,11 +53,18 @@ int countTillers(Mat image){
         g = input[image.step * x + y +1];
         r = input[image.step * x + y + 2];
         
-        if(b == 0 && g == 0 && r == 0){
-            if(trace(x, y, input, image)){
+        if(b != 0 && g != 0 && r != 0){
+            startX = x;
+            startY = y;
+            
+            
                 tiller++;
-            }
+            
+            x = startX+1;
         }
+        else x++;
+        if (x==image.cols-1)
+            y--;
     } while (x<image.cols && y>=0);
 }
 
@@ -66,7 +73,7 @@ int TillerCount::perform(Mat image) //vector<int>
 {
     cout << "Tiller counting" << endl;
     
-    int tillerCount = countTillers(image);
+    int tillerCount=0;
     
     return tillerCount;
 }
