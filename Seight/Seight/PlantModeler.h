@@ -39,8 +39,8 @@ private:
     IEdgeDetect *edgeDetection;
     ISkeletonize *skeletonization;
     IPlantStructure *structure;
-    //TillerCount tillerCount;
-    int countTiller(Mat image); //Update return type and parameters based on what is needed
+    TillerCount *tillerCount;
+    //int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(); //Update return type and parameters based on what is needed
     
 public:
@@ -64,8 +64,8 @@ public:
                 plantModeler->imageFiltering = new defaultFilter;
                 plantModeler->edgeDetection = new defaultEdgeDetect;
                 plantModeler->skeletonization = new defaultSkeletonize;
-                plantModeler->structure = new PlantStructure;
-                
+                //plantModeler->structure = new PlantStructure;
+                plantModeler->tillerCount = new TillerCount;
                 cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:

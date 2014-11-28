@@ -17,13 +17,11 @@ using namespace cv;
 
 class TillerCount
 {
-private:
-    int tillerCount = 0;
 public:
     TillerCount();
     ~TillerCount();
     int perform(Mat img); //vector<int>
-    void checkSurrounding(int x, int y);
+    void trace(int x, int y, unsigned char *input, Mat image);
 };
 
 #endif /* defined(__Seight__TillerCount__) */

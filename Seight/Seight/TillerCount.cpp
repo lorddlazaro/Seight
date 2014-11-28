@@ -24,30 +24,50 @@ TillerCount::~TillerCount()
 {
 }
 
-void checkSurrounding(int x, int y){
+bool trace(int x, int y, unsigned char *input, Mat image){
+    int pixelCount = 0;
+    int b, g, r;
+    bool isTiller;
+    
+    do {
+        b = input[image.step * x + y];
+        g = input[image.step * x + y +1];
+        r = input[image.step * x + y + 2];
+    } while (b == 0 && g == 0 && r == 0);
+    
+    return isTiller;
+    
+    //isTiller true if at least 30 pixels
+}
 
+int countTillers(Mat image){
+    int x,y,b,g,r, tiller=0;
+    
+    x = 0;
+    y = image.rows;
+    
+    unsigned char *input = (unsigned char*)(image.data);
+    
+    do {
+        b = input[image.step * x + y];
+        g = input[image.step * x + y +1];
+        r = input[image.step * x + y + 2];
+        
+        if(b == 0 && g == 0 && r == 0){
+            if(trace(x, y, input, image)){
+                tiller++;
+            }
+        }
+    } while (x<image.cols && y>=0);
+    
+    return tiller;
 }
 
 int TillerCount::perform(Mat image) //vector<int>
 {
     cout << "Tiller counting" << endl;
     
-    int x,y,b,g,r;
-    
-    unsigned char *input = (unsigned char*)(image.data);
-    
-    for (x=0; x<image.cols; x++) {
-        for (y=image.rows; y>=0; y--) {
-            b = input[image.step * x + y];
-            g = input[image.step * x + y +1];
-            r = input[image.step * x + y + 2];
-            
-            if(b == 0 && g == 0 && r == 0){
-                checkSurrounding(x, y);
-                
-            }
-        }
-    }
+    int tillerCount = countTillers(image);
     
     return tillerCount;
 }

@@ -10,11 +10,11 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
     PlantModeler::correction->perform();
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
     PlantModeler::imageFiltering->perform(segmentedImage);
-    Mat sobel = PlantModeler::edgeDetection->perform(segmentedImage);
+    Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
-    Mat ps = PlantModeler::structure->perform(sobel, skeleton);
-    //PlantModeler::tillerCount.perform(ps);
-    PlantModeler::countTiller(ps);
+    //Mat ps = PlantModeler::structure->perform(edge, skeleton);
+    //PlantModeler::tillerCount->perform(ps);
+    //PlantModeler::countTiller(ps);
     PlantModeler::measureHeight();
     cout << "done processing" << endl;
 }
@@ -28,7 +28,7 @@ PlantModeler::~PlantModeler(){
     
 }
 
-void traceUp(int x, int y, unsigned char *input, Mat image){
+/*void traceUp(int x, int y, unsigned char *input, Mat image){
     int pixelCount = 0;
     int b, g, r;
     
@@ -60,7 +60,7 @@ int TillerCount::perform(Mat image) //vector<int>
     } while (x<image.cols && y>=0);
     
     return tillerCount;
-}
+}*/
 
 double PlantModeler::measureHeight()
 {

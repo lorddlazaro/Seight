@@ -27,8 +27,9 @@ Mat defaultSkeletonize::perform(Mat image)
 	//imshow("Thinning", bw);
     //waitKey(0);
 
-	imwrite("/image/result_ZhangSuen.JPG", bw, vector < int > {0});
-
+	//imwrite("/image/result_ZhangSuen.JPG", bw, vector < int > {0});
+    imwrite("/Users/pauletteconstantino/THESIS/structure3.JPG", bw);
+    
 	return bw;
 }
 
@@ -79,7 +80,7 @@ void defaultSkeletonize::thinning(Mat& im)
 		cv::absdiff(im, prev, diff);
 		im.copyTo(prev);
 		cout << countNonZero(diff) << endl;
-	} while (cv::countNonZero(diff) > 0);
+	} while (cv::countNonZero(diff) > 1000);
 
 	im *= 255;
 }
