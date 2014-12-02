@@ -10,6 +10,7 @@
 #include "IPlantStructure.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <vector>
 
 using namespace cv;
 
@@ -22,9 +23,9 @@ IPlantStructure::~IPlantStructure()
 {
 }
 
-Mat IPlantStructure::perform(Mat sk, Mat ed)
+Vector<Point> IPlantStructure::perform(Mat sk)
 {
-    Mat structure;
+    Vector<Point> structure_points;
     
-    return structure;
+    return structure_points;
 }

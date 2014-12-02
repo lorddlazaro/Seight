@@ -13,6 +13,7 @@
 #include "IPlantStructure.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <vector>
 
 using namespace cv;
 
@@ -21,7 +22,7 @@ class PlantStructure : public IPlantStructure
 public:
     PlantStructure();
     ~PlantStructure();
-    Mat perform(Mat skeleton, Mat edge);
+    Vector<Point> perform(Mat skeleton);
 };
 
 #endif /* defined(defaultEdgeDetect_H) */
