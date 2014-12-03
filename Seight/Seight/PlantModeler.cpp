@@ -64,5 +64,13 @@ int TillerCount::perform(Mat image) //vector<int>
 
 double PlantModeler::measureHeight()
 {
-    return 0.0;
+	double pixelsIncm = 9;
+	double height;
+	double distance;
+	//get highest point
+	//get lowest point
+	distance = 1; //get distance
+	height = distance / 9; //convert to cm
+
+    return height;
 }
