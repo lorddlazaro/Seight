@@ -49,9 +49,9 @@ void thresh_callback(int value, void *userdata)
 	imwrite("image/edgeDetect_Draw.JPG", drawing, vector < int > {0});
     imwrite("/Users/pauletteconstantino/THESIS/structure2.JPG", drawing, vector < int > {0});
 
-	//drawing.copyTo(result, src);
-	result = src + drawing;
-	imwrite("image/result_Canny.JPG", result, vector < int > {0});
+	drawing.copyTo(result, src);
+	result = drawing;
+	imwrite("/Users/pauletteconstantino/THESIS/structure5.JPG", result, vector < int > {0});
 }
 
 

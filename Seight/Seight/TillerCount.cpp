@@ -24,95 +24,66 @@ TillerCount::~TillerCount()
 {
 }
 
-/*bool trace(int x, int y, unsigned char *input, Mat image){
-    int pixelCount = 0;
+bool TillerCount::checkHSV(Mat seg_roi, int x, int y){
+    bool isBlack;
     int b, g, r;
-	bool isTiller = false;
     
-    do {
-        b = input[image.step * x + y];
-        g = input[image.step * x + y +1];
-        r = input[image.step * x + y + 2];
-    } while (b == 0 && g == 0 && r == 0);
     
-    return isTiller;
+    Vec3b pixel_s = seg_roi.at<Vec3b>(y,x);
+    b = pixel_s[0];
+    g = pixel_s[1];
+    r = pixel_s[2];
     
-    //isTiller true if at least 30 pixels
-}*/
+    if(b==0 && g==0 && r==0){
+        isBlack = true;
+    }
+    else isBlack = false;
+    
+    return isBlack;
+}
 
-int countTillers(Mat image){
+int TillerCount::countTillers(Mat edge, Mat segmented){
     Rect rectROI = Rect(160, 515, 106, 106);
-    Mat image_roi = image(rectROI);
+    Mat edge_roi = edge(rectROI);
+    Mat seg_roi = segmented(rectROI);
     
-    //imshow("ROI", image_roi);
-    //waitKey(0);
+    imwrite("/Users/pauletteconstantino/THESIS/ROI.JPG", seg_roi);
     
-    //imwrite("/Users/pauletteconstantino/THESIS/ROI.JPG", image_roi);
-    
-    int start=0, tiller=0;
+    int tiller=0;
     int b, g, r;
     //unsigned char *input = (unsigned char*)(image.data);
     
-    int y = image_roi.rows/2;
-    for (int x = 0; x<image_roi.cols; x++) {
+    int y = edge_roi.rows/2;
+    for (int x = 0; x<edge_roi.cols; x++) {
     
-        Vec3b pixel = image_roi.at<Vec3b>(y,x);
+        Vec3b pixel_e = edge_roi.at<Vec3b>(y,x);
         
-        int b = pixel[0];
-        int g = pixel[1];
-        int r = pixel[2];
+        b = pixel_e[0];
+        g = pixel_e[1];
+        r = pixel_e[2];
         
-        cout << "r:" << r << " g:" << g << " b:" << b << endl;
+        //cout << "r:" << r << " g:" << g << " b:" << b << endl;
         
         if(b>0 && g>0 && r>0){
-            if(start==0){
-                start = 1;
-            }
-            else if(start==1){
-                tiller++;
-                start = 0;
+            if(x+1<seg_roi.cols){
+                if(checkHSV(seg_roi, x+1, y)==false){
+                    tiller++;
+                }
             }
         }
     }
     
     printf("Tiller count is: %d\n", tiller);
-    /*int x,y,b,g,r, tiller=0, startX, startY, currX, currY;
-    
-    x = 0;
-    y = image.rows;
-    
-    unsigned char *input = (unsigned char*)(image.data);
-    
-    do {
-        b = input[image.step * x + y];
-        g = input[image.step * x + y +1];
-        r = input[image.step * x + y + 2];
-        
-        if(b != 0 && g != 0 && r != 0){
-            startX = x;
-            startY = y;
-            
-            
-                tiller++;
-            
-            x = startX+1;
-        }
-        else x++;
-        if (x==image.cols-1)
-            y--;
-    } while (x<image.cols && y>=0);*/
 
 	return tiller;
 }
 
 
-int TillerCount::perform(Mat image) //vector<int>
+int TillerCount::perform(Mat edge, Mat segmented) //vector<int>
 {
     cout << "Tiller counting" << endl;
     
-    int tillerCount=countTillers(image);
-    
-    //countTillers(image);
+    int tillerCount=countTillers(edge, segmented);
     
     return tillerCount;
 }
