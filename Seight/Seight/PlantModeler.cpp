@@ -71,6 +71,9 @@ double PlantModeler::measureHeight(Mat skeleton)
 	bool highestFound = false, lowestFound = false;
 	int highx = 0, highy = 0, lowx = 0, lowy = 0;
 	
+	//cout << skeleton << endl;
+
+
 	/*find highest point*/
 	imshow("SKEL", skeleton);
 	waitKey(0);
@@ -83,13 +86,14 @@ double PlantModeler::measureHeight(Mat skeleton)
 	{
 		for (int j = 0; j < skeleton.cols/3 && !highestFound; j++)
 		{
+			//cout << skeleton.at<Vec3b>(i, j) << endl;
 			Vec3b pixel = skeleton.at<Vec3b>(i, j);
 			//cout << "i" << i;
 			//cout << "j" << j << endl;
 			//waitKey(0);
-			b = pixel[0];
-			g = pixel[1];
-			r = pixel[2];
+			b = pixel.val[0];
+			g = pixel.val[1];
+			r = pixel.val[2];
 
 			//cout << "r:" << r << " g:" << g << " b:" << b << endl;
 
@@ -98,9 +102,6 @@ double PlantModeler::measureHeight(Mat skeleton)
 				highx = i;
 				highy = j;
 				highestFound = true;
-				pixel[0] = 0;
-				pixel[1] = 0;
-				pixel[2] = 255;
 				skeleton.at<Vec3b>(i, j) = pixel;
 				cout << "r:" << r << " g:" << g << " b:" << b << endl;
 				cout << "highest found! " << i << " " << j << endl;
@@ -130,10 +131,6 @@ double PlantModeler::measureHeight(Mat skeleton)
 				lowx = i;
 				lowy = j;
 				lowestFound = true;
-				pixel[0] = 0;
-				pixel[1] = 0;
-				pixel[2] = 255;
-				skeleton.at<Vec3b>(i, j) = pixel;
 				cout << "r:" << r << " g:" << g << " b:" << b << endl;
 				cout << "lowest found! " << i << " " << j << endl;
 				waitKey(0);
@@ -141,8 +138,8 @@ double PlantModeler::measureHeight(Mat skeleton)
 		}
 	}
 
-	imshow("COLOR", skeleton);
-	waitKey(0);
+	//imshow("COLOR", skeleton);
+	//waitKey(0);
 	double x = lowx - highx;
 	double y = lowy - highy;
 
