@@ -20,8 +20,9 @@ class TillerCount
 public:
     TillerCount();
     ~TillerCount();
-    int perform(Mat img); //vector<int>
-    void trace(int x, int y, unsigned char *input, Mat image);
+    int perform(Mat edge, Mat segmented); //vector<int>
+    int countTillers(Mat edge, Mat segmented);
+    bool checkHSV(Mat segmented, int x, int y);
 };
 
 #endif /* defined(__Seight__TillerCount__) */
