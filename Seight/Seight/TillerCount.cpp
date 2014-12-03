@@ -40,8 +40,43 @@ TillerCount::~TillerCount()
     //isTiller true if at least 30 pixels
 }*/
 
-void countTillers(Mat image){
-    int x,y,b,g,r, tiller=0, startX, startY, currX, currY;
+int countTillers(Mat image){
+    Rect rectROI = Rect(160, 515, 106, 106);
+    Mat image_roi = image(rectROI);
+    
+    //imshow("ROI", image_roi);
+    //waitKey(0);
+    
+    //imwrite("/Users/pauletteconstantino/THESIS/ROI.JPG", image_roi);
+    
+    int start=0, tiller=0;
+    int b, g, r;
+    //unsigned char *input = (unsigned char*)(image.data);
+    
+    int y = image_roi.rows/2;
+    for (int x = 0; x<image_roi.cols; x++) {
+    
+        Vec3b pixel = image_roi.at<Vec3b>(y,x);
+        
+        int b = pixel[0];
+        int g = pixel[1];
+        int r = pixel[2];
+        
+        cout << "r:" << r << " g:" << g << " b:" << b << endl;
+        
+        if(b>0 && g>0 && r>0){
+            if(start==0){
+                start = 1;
+            }
+            else if(start==1){
+                tiller++;
+                start = 0;
+            }
+        }
+    }
+    
+    printf("Tiller count is: %d\n", tiller);
+    /*int x,y,b,g,r, tiller=0, startX, startY, currX, currY;
     
     x = 0;
     y = image.rows;
@@ -65,7 +100,7 @@ void countTillers(Mat image){
         else x++;
         if (x==image.cols-1)
             y--;
-    } while (x<image.cols && y>=0);
+    } while (x<image.cols && y>=0);*/
 
 	return tiller;
 }
@@ -75,7 +110,9 @@ int TillerCount::perform(Mat image) //vector<int>
 {
     cout << "Tiller counting" << endl;
     
-    int tillerCount=0;
+    int tillerCount=countTillers(image);
+    
+    //countTillers(image);
     
     return tillerCount;
 }

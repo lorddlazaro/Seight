@@ -13,6 +13,7 @@
 //#include "stdafx.h"
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
+#include <vector>
 
 using namespace cv;
 
@@ -21,7 +22,7 @@ class IPlantStructure
 public:
     IPlantStructure();
     ~IPlantStructure();
-    virtual Mat perform(Mat sk, Mat ed);
+    virtual Vector<Point> perform(Mat sk);
 };
 
 
