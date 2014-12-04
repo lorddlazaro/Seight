@@ -15,5 +15,5 @@ defaultPerspectiveCorrect::~defaultPerspectiveCorrect()
 
 void defaultPerspectiveCorrect::perform()
 {
-	cout << "performing Perspective Correction" << endl;
+	//cout << "performing Perspective Correction" << endl;
 }

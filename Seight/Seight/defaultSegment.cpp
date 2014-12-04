@@ -20,7 +20,7 @@ defaultSegment::~defaultSegment()
 
 Mat defaultSegment::perform(Mat image_)
 {
-	cout << "perform segmentation" << endl;
+	//cout << "perform segmentation" << endl;
 
 	Mat color_image = image_;
 

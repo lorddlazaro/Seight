@@ -15,7 +15,7 @@ defaultSkeletonize::~defaultSkeletonize()
 
 Mat defaultSkeletonize::perform(Mat image)
 {
-	cout << "perform skeletonization" << endl;
+	//cout << "perform skeletonization" << endl;
 
 	Mat bw;
 	cvtColor(image, bw, CV_BGR2GRAY);
@@ -74,12 +74,12 @@ void defaultSkeletonize::thinning(Mat& im)
 	cv::Mat diff;
 
 	do {
-		cout << "in thinning ";
+		//cout << "in thinning ";
 		thinningIteration(im, 0);
 		thinningIteration(im, 1);
 		cv::absdiff(im, prev, diff);
 		im.copyTo(prev);
-		cout << countNonZero(diff) << endl;
+		//cout << countNonZero(diff) << endl;
 	} while (cv::countNonZero(diff) > 1000);
 
 	im *= 255;

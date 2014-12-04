@@ -57,7 +57,7 @@ void thresh_callback(int value, void *userdata)
 
 Mat defaultEdgeDetect::perform(Mat image)
 {
-	cout << "perform edge detection" << endl;
+	//cout << "perform edge detection" << endl;
 	src = image;
 	/// Convert image to gray and blur it
 	cvtColor(src, src_gray, CV_BGR2GRAY);

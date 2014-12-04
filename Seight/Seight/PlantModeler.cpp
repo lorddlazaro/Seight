@@ -7,19 +7,18 @@ using namespace std;
 
 void PlantModeler::processImage(Mat image) //PhenotypicData
 {
-    cout << "processing image" << endl;
+    //cout << "processing image" << endl;
     PlantModeler::correction->perform();
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
     PlantModeler::imageFiltering->perform(segmentedImage);
     Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
-    
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
     //Vector<Point> img_points = PlantModeler::structure->perform(skeleton);
     PlantModeler::tillerCount->perform(edge, segmentedImage);
     PlantModeler::measureHeight(skeleton);
     //imshow("edge", edge);
     //waitKey(0);
-    cout << "done processing" << endl;
+    //cout << "done processing" << endl;
 }
 
 PlantModeler::PlantModeler()
@@ -45,12 +44,12 @@ double PlantModeler::measureHeight(Mat skeleton)
 	cvtColor(skeleton, skeleton, CV_GRAY2BGR);
 
 	/*find highest point*/
-	imshow("SKEL", skeleton);
+	//imshow("SKEL", skeleton);
 	waitKey(0);
-	cout << "rows "; cout << skeleton.rows << endl;
-	cout << "cols "; cout << skeleton.cols << endl;
+	//cout << "rows "; cout << skeleton.rows << endl;
+	//cout << "cols "; cout << skeleton.cols << endl;
 
-	cout << "Looking for highest" << endl;
+	//cout << "Looking for highest" << endl;
 	waitKey(0);
 	for (int i = 0; i < skeleton.rows && !highestFound; i++)
 	{
@@ -73,16 +72,16 @@ double PlantModeler::measureHeight(Mat skeleton)
 				highy = j;
 				highestFound = true;
 				skeleton.at<Vec3b>(i, j) = pixel;
-				cout << "r:" << r << " g:" << g << " b:" << b << endl;
-				cout << "highest found! " << i << " " << j << endl;
+				//cout << "r:" << r << " g:" << g << " b:" << b << endl;
+				//cout << "highest found! " << i << " " << j << endl;
 				waitKey(0);
 			}
 			//else cout << "no" << endl;
 		}
 	}
-	cout << "Looking for lowest" << endl;
-	cout << "rows "; cout << skeleton.rows-1 << endl;
-	cout << "cols "; cout << skeleton.cols-1 << endl;
+	//cout << "Looking for lowest" << endl;
+	//cout << "rows "; cout << skeleton.rows-1 << endl;
+	//cout << "cols "; cout << skeleton.cols-1 << endl;
 	waitKey(0);
 	
 	/*find lowest point*/
@@ -101,8 +100,8 @@ double PlantModeler::measureHeight(Mat skeleton)
 				lowx = i;
 				lowy = j;
 				lowestFound = true;
-				cout << "r:" << r << " g:" << g << " b:" << b << endl;
-				cout << "lowest found! " << i << " " << j << endl;
+				//cout << "r:" << r << " g:" << g << " b:" << b << endl;
+				//cout << "lowest found! " << i << " " << j << endl;
 				waitKey(0);
 			}
 		}

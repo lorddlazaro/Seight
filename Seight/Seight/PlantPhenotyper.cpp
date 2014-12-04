@@ -23,22 +23,37 @@ PlantPhenotyper::~PlantPhenotyper()
 int PlantPhenotyper::phenotype()
 {
 	Mat image;
-	image = imread("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/IR64-009_NoRuler_Resize.JPG"/*"/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/IR64-009_NoRuler_Resize.JPG"*/, CV_LOAD_IMAGE_COLOR);   // Read the file
-
-	if (!image.data)                              // Check for invalid input
+	string directory = "D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/Resized/";
+	string imageNameConvention = "IR64-0";
+	string fileExtension = ".JPG";
+	string imageFilename = "";
+	/*loop images to phenotype*/
+	for (int i = 1; i <= 60; i++)
 	{
-		cout << "Could not open or find the image" << std::endl;
-		return -1;
+		imageFilename = "";
+		imageFilename.append(directory);
+		imageFilename.append(imageNameConvention);
+		if (i < 10)
+		{
+			imageFilename.append("0");
+			imageFilename.append(to_string(i));
+		}
+		else
+		{
+			imageFilename.append(to_string(i));
+		}
+		imageFilename.append(fileExtension);
+		image = imread(imageFilename/*"/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/IR64-009_NoRuler_Resize.JPG"*/, CV_LOAD_IMAGE_COLOR);   // Read the file
+		if (!image.data)                           // Check for invalid input
+		{
+			cout << "Could not open or find the image: " << imageFilename << std::endl;
+		}
+		else
+		{
+			cout << "Opened " << i << endl;
+			PlantPhenotyper::plantModeler.processImage(image);
+		}
 	}
-	
-	//Size size(350, 526);
-	//resize(image, image, size);
-	
-	//namedWindow("Raw Image", WINDOW_AUTOSIZE);// Create a window for display.
-	//imshow("Raw Image", image);
-	//waitKey(3000);
-
-	PlantPhenotyper::plantModeler.processImage(image);
 
 	return 1;
 }

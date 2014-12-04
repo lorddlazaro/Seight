@@ -81,7 +81,7 @@ int TillerCount::countTillers(Mat edge, Mat segmented){
 
 int TillerCount::perform(Mat edge, Mat segmented) //vector<int>
 {
-    cout << "Tiller counting" << endl;
+    //cout << "Tiller counting" << endl;
     
     int tillerCount=countTillers(edge, segmented);
     
