@@ -1,4 +1,4 @@
-﻿Build started 12/3/2014 9:15:59 PM.
+﻿Build started 12/4/2014 11:12:50 AM.
      1>Project "D:\DE LA SALLE UNIVERSITY\Work\Programming\Seight\Seight\Seight\Seight.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          E:\CINEMA\Installer\VC\bin\CL.exe /c /IE:\Installer\opencv\build\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\Seight.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt PlantModeler.cpp
@@ -33,4 +33,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:07.15
+Time Elapsed 00:00:02.48

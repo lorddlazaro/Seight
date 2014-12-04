@@ -19,8 +19,6 @@ void PlantModeler::processImage(Mat image) //PhenotypicData
     PlantModeler::measureHeight(skeleton);
     //imshow("edge", edge);
     //waitKey(0);
-    PlantModeler::tillerCount->perform(edge, segmentedImage);
-    PlantModeler::measureHeight(skeleton);
     cout << "done processing" << endl;
 }
 
@@ -44,7 +42,7 @@ double PlantModeler::measureHeight(Mat skeleton)
 	int highx = 0, highy = 0, lowx = 0, lowy = 0;
 	
 	//cout << skeleton << endl;
-
+	cvtColor(skeleton, skeleton, CV_GRAY2BGR);
 
 	/*find highest point*/
 	imshow("SKEL", skeleton);
@@ -56,7 +54,7 @@ double PlantModeler::measureHeight(Mat skeleton)
 	waitKey(0);
 	for (int i = 0; i < skeleton.rows && !highestFound; i++)
 	{
-		for (int j = 0; j < skeleton.cols/3 && !highestFound; j++)
+		for (int j = 0; j < skeleton.cols && !highestFound; j++)
 		{
 			//cout << skeleton.at<Vec3b>(i, j) << endl;
 			Vec3b pixel = skeleton.at<Vec3b>(i, j);
@@ -90,7 +88,7 @@ double PlantModeler::measureHeight(Mat skeleton)
 	/*find lowest point*/
 	for (int i = skeleton.rows-1; i >= 0 && !lowestFound; i--)
 	{
-		for (int j = skeleton.cols/3-1; j >= 0 && !lowestFound; j--)
+		for (int j = skeleton.cols-1; j >= 0 && !lowestFound; j--)
 		{
 			Vec3b pixel = skeleton.at<Vec3b>(i, j);
 			//cout << "i" << i;
