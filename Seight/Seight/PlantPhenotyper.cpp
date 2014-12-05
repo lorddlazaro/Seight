@@ -26,23 +26,26 @@ int PlantPhenotyper::phenotype()
 	string directory = "D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/Resized/";
 	string imageNameConvention = "IR64-0";
 	string fileExtension = ".JPG";
+	string filename = "";
 	string imageFilename = "";
 	/*loop images to phenotype*/
 	for (int i = 1; i <= 60; i++)
 	{
 		imageFilename = "";
+		filename = "";
 		imageFilename.append(directory);
-		imageFilename.append(imageNameConvention);
+		filename.append(imageNameConvention);
 		if (i < 10)
 		{
-			imageFilename.append("0");
-			imageFilename.append(to_string(i));
+			filename.append("0");
+			filename.append(to_string(i));
 		}
 		else
 		{
-			imageFilename.append(to_string(i));
+			filename.append(to_string(i));
 		}
-		imageFilename.append(fileExtension);
+		filename.append(fileExtension);
+		imageFilename.append(filename);
 		image = imread(imageFilename/*"/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/IR64-009_NoRuler_Resize.JPG"*/, CV_LOAD_IMAGE_COLOR);   // Read the file
 		if (!image.data)                           // Check for invalid input
 		{
@@ -51,7 +54,7 @@ int PlantPhenotyper::phenotype()
 		else
 		{
 			cout << "Opened " << i << endl;
-			PlantPhenotyper::plantModeler.processImage(image);
+			PlantPhenotyper::plantModeler.processImage(image, filename);
 		}
 	}
 

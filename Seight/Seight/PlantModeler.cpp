@@ -1,23 +1,48 @@
 #include "stdafx.h"
 #include "PlantModeler.h"
 #include <iostream>
+#include <fstream>
 #include <vector>
 
 using namespace std;
 
-void PlantModeler::processImage(Mat image) //PhenotypicData
+void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 {
+	ofstream myfile;
+	
+	
     //cout << "processing image" << endl;
     PlantModeler::correction->perform();
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
     PlantModeler::imageFiltering->perform(segmentedImage);
     Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
-    //Vector<Point> img_points = PlantModeler::structure->perform(skeleton);
-    PlantModeler::tillerCount->perform(edge, segmentedImage);
-    PlantModeler::measureHeight(skeleton);
-    //imshow("edge", edge);
-    //waitKey(0);
+	myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/tillerResults.txt", ios_base::app);
+    int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
+	myfile << tiller << "\n";
+	myfile.close();
+	myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/heightResults.txt", ios_base::app);
+    double height = PlantModeler::measureHeight(skeleton);
+	myfile << height << "\n";
+	myfile.close();
+	string hsvDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/HSV/";
+	string imageFile = "";
+	imageFile.append(hsvDirectory);
+	imageFile.append(filename);
+	cout << imageFile << endl;
+	imwrite(imageFile, segmentedImage);
+	string edgeDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Edge/";
+	imageFile = "";
+	imageFile.append(edgeDirectory);
+	imageFile.append(filename);
+	cout << imageFile << endl;
+	imwrite(imageFile, edge);
+	string skeletonDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Skeleton/";
+	imageFile = "";
+	imageFile.append(skeletonDirectory);
+	imageFile.append(filename);
+	cout << imageFile << endl;
+	imwrite(imageFile, skeleton);
     //cout << "done processing" << endl;
 }
 

@@ -50,7 +50,7 @@ public:
     {
         APPROACH_A, APPROACH_B, APPROACH_C //rename to more descriptive identifiers
     };
-    void processImage(Mat image); //PhenotypicData
+    void processImage(Mat image, string name); //PhenotypicData
     static PlantModeler createApproach(Approach approach)
     {
         cout << "in create approach" << endl;

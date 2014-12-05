@@ -27,7 +27,7 @@ Mat defaultSkeletonize::perform(Mat image)
 	//imshow("Thinning", bw);
     //waitKey(0);
 
-	imwrite("/image/result_ZhangSuen.JPG", bw, vector < int > {0});
+	//imwrite("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/result_ZhangSuen.JPG", bw, vector < int > {0});
     //imwrite("/Users/pauletteconstantino/THESIS/structure3.JPG", bw);
     
 	return bw;
