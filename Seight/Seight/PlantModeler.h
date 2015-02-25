@@ -4,6 +4,8 @@
 #include "stdafx.h"
 #include "PhenotypicData.h"
 
+#include "IPreprocess.h"
+
 #include "ISegment.h"
 #include "defaultSegment.h"
 #include "HSVSegment.h"
@@ -24,6 +26,9 @@
 #include "IPlantStructure.h"
 #include "PlantStructure.h"
 
+#include "IHeightMeasure.h"
+#include "EuclideanHeightMeasure.h"
+
 #include "TillerCount.h"
 
 #include <iostream>
@@ -34,12 +39,14 @@ class PlantModeler
 {
 private:
     ISegment *segmentation;
+	IPreprocess *preprocess;
     IPerspectiveCorrect *correction;
     IFilter *imageFiltering;
     IEdgeDetect *edgeDetection;
     ISkeletonize *skeletonization;
     IPlantStructure *structure;
     TillerCount *tillerCount;
+	IHeightMeasure *heightMeasure;
     //int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(Mat skeleton); //Update return type and parameters based on what is needed
     
@@ -69,6 +76,14 @@ public:
                 cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:
+				plantModeler->correction = new defaultPerspectiveCorrect;
+				plantModeler->preprocess = new defaultPreprocess;//cut and normalize
+				plantModeler->segmentation = new HSVSegment;
+				plantModeler->edgeDetection = new defaultEdgeDetect;
+				plantModeler->tillerCount = new TillerCount;
+				plantModeler->skeletonization = new defaultSkeletonize;
+				plantModeler->heightMeasure = new EuclideanHeightMeasure;
+				cout << "in approach B" << endl;
                 break;
             case PlantModeler::APPROACH_C:
                 break;

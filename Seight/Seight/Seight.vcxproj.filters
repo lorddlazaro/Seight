@@ -90,6 +90,12 @@
     <ClInclude Include="IPlantStructure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="IPreprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="defaultPreprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -162,6 +168,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IPlantStructure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IPreprocess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="defaultPreprocess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
