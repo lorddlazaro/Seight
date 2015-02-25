@@ -1,6 +1,6 @@
 #pragma once
-#ifndef IPreprocess_H
-#define IPreprocess_H
+#ifndef IHeightMeasure_H
+#define IHeightMeasure_H
 
 #include <vector>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -17,4 +17,4 @@ public:
 	virtual float perform(Mat image);
 };
 
-#endif IPreprocess_H
+#endif IHeightMeasure_H

@@ -5,6 +5,7 @@
 #include "PhenotypicData.h"
 
 #include "IPreprocess.h"
+#include "defaultPreprocess.h"
 
 #include "ISegment.h"
 #include "defaultSegment.h"
@@ -45,7 +46,7 @@ private:
     IEdgeDetect *edgeDetection;
     ISkeletonize *skeletonization;
     IPlantStructure *structure;
-    TillerCount *tillerCount;
+	TillerCount *tillerCount;
 	IHeightMeasure *heightMeasure;
     //int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(Mat skeleton); //Update return type and parameters based on what is needed

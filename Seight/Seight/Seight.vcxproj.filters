@@ -90,10 +90,16 @@
     <ClInclude Include="IPlantStructure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="IPreprocess.h">
+    <ClInclude Include="EuclideanHeightMeasure.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="defaultPreprocess.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IHeightMeasure.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="IPreprocess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -170,10 +176,16 @@
     <ClCompile Include="IPlantStructure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="IPreprocess.cpp">
+    <ClCompile Include="EuclideanHeightMeasure.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="defaultPreprocess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IHeightMeasure.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="IPreprocess.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
