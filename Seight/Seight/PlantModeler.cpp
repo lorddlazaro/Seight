@@ -29,19 +29,19 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 	string imageFile = "";
 	imageFile.append(hsvDirectory);
 	imageFile.append(filename);
-	cout << imageFile << endl;
+	//cout << imageFile << endl;
 	imwrite(imageFile, segmentedImage);
 	string edgeDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Edge/";
 	imageFile = "";
 	imageFile.append(edgeDirectory);
 	imageFile.append(filename);
-	cout << imageFile << endl;
+	//cout << imageFile << endl;
 	imwrite(imageFile, edge);
 	string skeletonDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Skeleton/";
 	imageFile = "";
 	imageFile.append(skeletonDirectory);
 	imageFile.append(filename);
-	cout << imageFile << endl;
+	//cout << imageFile << endl;
 	imwrite(imageFile, skeleton);
     //cout << "done processing" << endl;
 }
@@ -57,7 +57,7 @@ PlantModeler::~PlantModeler(){
 
 double PlantModeler::measureHeight(Mat skeleton)
 {
-	double pixelsIncm = 9;
+	double pixelsIncm = 8;
 	double height;
 	double distance;
 	int b, g, r;
@@ -93,12 +93,13 @@ double PlantModeler::measureHeight(Mat skeleton)
 
 			if (b == 255 && g == 255 && r == 255){
 				//cout << "yes" << endl;
-				highx = i;
-				highy = j;
+				highx = j;
+				highy = i;
 				highestFound = true;
 				skeleton.at<Vec3b>(i, j) = pixel;
-				//cout << "r:" << r << " g:" << g << " b:" << b << endl;
-				//cout << "highest found! " << i << " " << j << endl;
+
+				//cout << r << " " << g << " " << b << endl;
+				cout << "highest found! " << j << " " << i << endl;
 				waitKey(0);
 			}
 			//else cout << "no" << endl;
@@ -122,11 +123,11 @@ double PlantModeler::measureHeight(Mat skeleton)
 			r = pixel[2];
 			//cout << "r:" << r << " g:" << g << " b:" << b << endl;
 			if (b == 255 && g == 255 && r == 255){
-				lowx = i;
-				lowy = j;
+				lowx = j;
+				lowy = i;
 				lowestFound = true;
-				//cout << "r:" << r << " g:" << g << " b:" << b << endl;
-				//cout << "lowest found! " << i << " " << j << endl;
+				//cout << r << " " << g << " " << b << endl;
+				cout << "lowest found! " << j << " " << i << endl;
 				waitKey(0);
 			}
 		}
@@ -140,7 +141,7 @@ double PlantModeler::measureHeight(Mat skeleton)
 	distance = pow(x, 2) + pow(y, 2);           //calculating distance by euclidean formula
 	distance = sqrt(distance);
 
-	height = distance / 9; //convert to cm
+	height = distance / pixelsIncm; //convert to cm
 	
 	cout << "height " << height << endl;
 

@@ -16,8 +16,11 @@ int main()
 	//PlantDAO* plantDAO = new SQLPlantDAO;
 	//Plant* plant = new Plant;
 	//(*plantDAO).insertPlant(*plant);
+
+
+	//get new plants
 	PlantPhenotyper* plantPhenotyper = new PlantPhenotyper;
-	plantPhenotyper->phenotype();
+	plantPhenotyper->phenotype(/*list of plants*/);
 	cin.ignore();
 
 	return 0;
