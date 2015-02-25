@@ -67,18 +67,18 @@ public:
         switch (approach)
         {
             case PlantModeler::APPROACH_A:
-                plantModeler->segmentation = new HSVSegment;
-                plantModeler->correction = new defaultPerspectiveCorrect;
-                plantModeler->imageFiltering = new defaultFilter;
+				plantModeler->correction = new defaultPerspectiveCorrect;
+				plantModeler->preprocess = new defaultPreprocess;
+				plantModeler->segmentation = new HSVSegment;
                 plantModeler->edgeDetection = new defaultEdgeDetect;
-                plantModeler->skeletonization = new defaultSkeletonize;
-                //plantModeler->structure = new PlantStructure;
                 plantModeler->tillerCount = new TillerCount;
+				plantModeler->skeletonization = new defaultSkeletonize;
+				plantModeler->heightMeasure = new EuclideanHeightMeasure;
                 cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:
-				plantModeler->correction = new defaultPerspectiveCorrect;
-				plantModeler->preprocess = new defaultPreprocess;//cut and normalize
+				plantModeler->correction = new defaultPerspectiveCorrect; // change to some other perspective correct
+				plantModeler->preprocess = new defaultPreprocess;//cut and normalize CutAndNormalizePreprocess
 				plantModeler->segmentation = new HSVSegment;
 				plantModeler->edgeDetection = new defaultEdgeDetect;
 				plantModeler->tillerCount = new TillerCount;
