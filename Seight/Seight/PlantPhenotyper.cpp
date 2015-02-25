@@ -5,6 +5,8 @@
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
+#include <windows.h>
+#include <string>
 
 using namespace cv;
 using namespace std;
@@ -20,10 +22,27 @@ PlantPhenotyper::~PlantPhenotyper()
 {
 }
 
+std::string GetExeFileName()
+{
+	char buffer[MAX_PATH];
+	GetModuleFileNameA(NULL, buffer, MAX_PATH);
+	return std::string(buffer);
+}
+
+std::string GetExePath()
+{
+	std::string f = GetExeFileName();
+	return f.substr(0, f.find_last_of("\\/"));
+}
+
 int PlantPhenotyper::phenotype()
 {
 	Mat image;
-	string directory = "D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/Resized/";
+	//string directory = "D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/Resized/";
+	string directory = GetExePath();
+	directory.resize(directory.size() - 6);
+	directory.append("\\Seight\\image\\Resized\\");
+	cout << "my directory is " << GetExePath() << "\n";
 	string imageNameConvention = "IR64-0";
 	string fileExtension = ".JPG";
 	string filename = "";
