@@ -80,7 +80,7 @@ void defaultSkeletonize::thinning(Mat& im)
         cv::absdiff(im, prev, diff);
         im.copyTo(prev);
         //cout << countNonZero(diff) << endl;
-    } while (cv::countNonZero(diff) > 1000);
+    } while (cv::countNonZero(diff) > 2000);
     
     im *= 255;
 }

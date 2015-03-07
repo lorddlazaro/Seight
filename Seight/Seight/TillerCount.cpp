@@ -43,7 +43,7 @@ bool TillerCount::checkHSV(Mat seg_roi, int x, int y){
 }
 
 int TillerCount::countTillers(Mat edge, Mat segmented){
-    Rect rectROI = Rect(160, 515, 106, 106);
+	Rect rectROI = Rect(60, 320, 180, 100);
     Mat edge_roi = edge(rectROI);
     Mat seg_roi = segmented(rectROI);
     

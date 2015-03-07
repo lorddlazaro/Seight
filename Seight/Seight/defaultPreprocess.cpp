@@ -19,19 +19,21 @@ Mat defaultPreprocess::perform(Mat image)
 	/*HISTOGRAM EQUALIZATION*/
 	cout << "default preprocessing" << endl;
 	
-	Mat ycrcb;
+	Mat hsv;
 	//imshow("image", image);
-	cvtColor(image, ycrcb, CV_BGR2YCrCb);
+	cvtColor(image, hsv, CV_BGR2HSV);
 
 	vector<Mat> channels;
-	split(ycrcb, channels);
-
-	equalizeHist(channels[0], channels[0]);
+	split(hsv, channels);
 
 	Mat result;
-	merge(channels, ycrcb);
-
-	cvtColor(ycrcb, result, CV_YCrCb2BGR);
+	equalizeHist(channels[1], channels[1]);
+	equalizeHist(channels[2], channels[2]);
+	merge(channels, hsv);
+	cvtColor(hsv, result, CV_HSV2BGR);
+	imshow("h", hsv);
+	imshow("r", result);
+	waitKey(0);
 
 	//imshow("result", result);
 	//waitKey(0);

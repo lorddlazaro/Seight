@@ -13,10 +13,10 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     
     
     //cout << "processing image" << endl;
-    PlantModeler::correction->perform();
+    //PlantModeler::correction->perform();
 	Mat preprocessedImage = PlantModeler::preprocess->perform(image);
     Mat segmentedImage = PlantModeler::segmentation->perform(preprocessedImage);
-    Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
+	Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
     
 	string histDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/EqHist/";
@@ -26,7 +26,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 	cout << imageFile << endl;
 	imwrite(imageFile, preprocessedImage);
 
-	myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/tillerResults.txt", ios_base::app);
+	/**/myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/tillerResults.txt", ios_base::app);
     int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
     myfile << tiller << "\n";
     myfile.close();
@@ -34,7 +34,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/heightResults.txt", ios_base::app);
     double height = PlantModeler::measureHeight(skeleton);
     myfile << height << "\n";
-    myfile.close();
+    myfile.close();/**/
 
     string hsvDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/HSV/";
     imageFile = "";
@@ -42,7 +42,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, segmentedImage);
-    
+	/**/
 	string edgeDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Edge/";
     imageFile = "";
     imageFile.append(edgeDirectory);
@@ -56,7 +56,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, skeleton);
-    //cout << "done processing" << endl;
+    //cout << "done processing" << endl;*/
 }
 
 PlantModeler::PlantModeler()
