@@ -23,6 +23,8 @@ public:
     int perform(Mat edge, Mat segmented); //vector<int>
     int countTillers(Mat edge, Mat segmented);
     bool checkHSV(Mat segmented, int x, int y);
+	bool checkBlackPixel(Mat seg, int x, int y);
+	int getMode(vector<int> tillerData);
 };
 
 #endif /* defined(__Seight__TillerCount__) */

@@ -11,6 +11,7 @@ public:
 	EuclideanHeightMeasure();
 	~EuclideanHeightMeasure();
 	float perform(Mat image);
+	float getDistance(float x, float y);
 };
 
 #endif EuclideanHeightMeasure_H

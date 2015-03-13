@@ -12,13 +12,50 @@ using namespace std;
 
 int main()
 {
+	/**
+	Mat src = imread("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/EqHist/IR64-002.jpg");
+	
+	// Create a window
+	namedWindow("My Window", 1);
 
+	//Create trackbar to change brightness
+	int min = 0;
+	createTrackbar("min", "My Window", &min, 255);
+
+	//Create trackbar to change contrast
+	int max = 255;
+	createTrackbar("max", "My Window", &max, 255);
+
+	Mat gray;
+	cvtColor(src, gray, CV_BGR2GRAY);
+
+	
+	while (true)
+	{
+		Mat bw;
+		cv::threshold(gray, bw, min, max, CV_THRESH_BINARY);
+		imshow("bw", bw);
+		//imshow("MyWindow", hsvImage);
+
+		//define range of green color in HSV
+
+		// Wait until user press some key for 50ms
+		int iKey = waitKey(50);
+
+		//if user press 'ESC' key
+		if (iKey == 27)
+		{
+			break;
+		}
+	}
+	/**/
 	/*
 	 * HSV Segment Slider
 	 *
-	 *
+	 
 	// Read original image 
-	Mat src = imread("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/EqHist/IR64-003.jpg");
+	Mat src = imread("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/EqHist/IR64-021.jpg");
+	//Mat src = imread("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/HSV.jpg");
 
 	//if fail to read the image
 	if (!src.data)
@@ -34,20 +71,21 @@ int main()
 	int iSliderValue1a = 0;
 	int iSliderValue1b = 0;
 	int iSliderValue1c = 0;
-	createTrackbar("H1", "My Window", &iSliderValue1a, 255);
-	createTrackbar("S1", "My Window", &iSliderValue1b, 255);
-	createTrackbar("V1", "My Window", &iSliderValue1c, 255);
+	createTrackbar("H1", "My Window", &iSliderValue1a, 255); cout << 1 << endl;
+	createTrackbar("S1", "My Window", &iSliderValue1b, 255); cout << 1 << endl;
+	createTrackbar("V1", "My Window", &iSliderValue1c, 255); cout << 1 << endl;
 
 	//Create trackbar to change contrast
 	int iSliderValue2a = 255;
 	int iSliderValue2b = 255;
 	int iSliderValue2c = 255;
-	createTrackbar("H2", "My Window", &iSliderValue2a, 255);
-	createTrackbar("S2", "My Window", &iSliderValue2b, 255);
-	createTrackbar("V2", "My Window", &iSliderValue2c, 255);
+	createTrackbar("H2", "My Window", &iSliderValue2a, 255); cout << 1 << endl;
+	createTrackbar("S2", "My Window", &iSliderValue2b, 255); cout << 1 << endl;
+	createTrackbar("V2", "My Window", &iSliderValue2c, 255); cout << 1 << endl;
 
 	while (true)
 	{
+		cout << 1 << endl;
 		Mat hsvImage;
 		//Convert image to HSV
 		cvtColor(src, hsvImage, CV_BGR2HSV);
@@ -74,6 +112,7 @@ int main()
 		
 		//show the brightness and contrast adjusted image
 		imshow("res", result);
+		imwrite("image/rgb.jpg", result);
 
 		// Wait until user press some key for 50ms
 		int iKey = waitKey(50);

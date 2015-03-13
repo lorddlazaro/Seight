@@ -102,6 +102,9 @@
     <ClInclude Include="IPreprocess.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="YCrCbSegment.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -186,6 +189,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="IPreprocess.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="YCrCbSegment.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

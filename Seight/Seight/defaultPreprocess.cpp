@@ -21,7 +21,7 @@ Mat defaultPreprocess::perform(Mat image)
 	
 	Mat hsv;
 	//imshow("image", image);
-	cvtColor(image, hsv, CV_BGR2YCrCb);
+	cvtColor(image, hsv, CV_BGR2HSV);
 
 	vector<Mat> channels;
 	split(hsv, channels);
@@ -31,11 +31,11 @@ Mat defaultPreprocess::perform(Mat image)
 	//equalizeHist(channels[1], channels[1]);
 	//equalizeHist(channels[2], channels[2]);
 	merge(channels, hsv);
-	cvtColor(hsv, result, CV_YCrCb2BGR);
-	imshow("h", hsv);
-	imshow("im", image);
-	imshow("r", result);
-	waitKey(0);
+	cvtColor(hsv, result, CV_HSV2BGR);
+	//imshow("h", hsv);
+	//imshow("im", image);
+	//imshow("r", result);
+	//waitKey(0);
 
 	//imshow("result", result);
 	//waitKey(0);

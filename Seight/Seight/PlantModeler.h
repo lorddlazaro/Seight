@@ -10,6 +10,7 @@
 #include "ISegment.h"
 #include "defaultSegment.h"
 #include "HSVSegment.h"
+#include "YCrCbSegment.h"
 
 #include "IPerspectiveCorrect.h"
 #include "defaultPerspectiveCorrect.h"
@@ -79,7 +80,7 @@ public:
             case PlantModeler::APPROACH_B:
 				plantModeler->correction = new defaultPerspectiveCorrect; // change to some other perspective correct
 				plantModeler->preprocess = new defaultPreprocess;//cut and normalize CutAndNormalizePreprocess
-				plantModeler->segmentation = new HSVSegment;
+				plantModeler->segmentation = new YCrCbSegment;
 				plantModeler->edgeDetection = new defaultEdgeDetect;
 				plantModeler->tillerCount = new TillerCount;
 				plantModeler->skeletonization = new defaultSkeletonize;
