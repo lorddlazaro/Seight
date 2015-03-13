@@ -14,11 +14,15 @@ defaultPreprocess::~defaultPreprocess()
 {
 }
 
-Mat defaultPreprocess::perform(Mat image)
+Mat defaultPreprocess::perform(Mat raw_image)
 {
 	/*HISTOGRAM EQUALIZATION*/
 	cout << "default preprocessing" << endl;
-	
+
+	//Crop Image
+	Rect rect_roi = Rect(0, 0, 240, 467);
+	Mat image = raw_image(rect_roi);
+
 	Mat hsv;
 	//imshow("image", image);
 	cvtColor(image, hsv, CV_BGR2HSV);

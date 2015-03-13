@@ -77,15 +77,11 @@ float EuclideanHeightMeasure::perform(Mat image)
 	/* Define Plant Base Point
 	 * y = image height - 16 
 	 * x = image width / 2 */
-	int baseYPoint = 16;
-	int y = image.rows - 1 - baseYPoint;
+	int y = image.rows - 1;
 	int x = image.cols / 2;
 	/* x = image width / 2 */
 
 	/*travel skeleton*/
-
-
-
 	/*find lowest point*
 	for (int i = image.rows - 1; i >= 0 && !lowestFound; i--)
 	{
