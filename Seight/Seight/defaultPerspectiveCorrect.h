@@ -10,7 +10,7 @@ class defaultPerspectiveCorrect: public IPerspectiveCorrect
 public:
 	defaultPerspectiveCorrect();
 	~defaultPerspectiveCorrect();
-	void perform();
+	Mat perform(Mat image);
 };
 
 #endif defaultPerspectiveCorrect_H

@@ -60,7 +60,8 @@ int PlantPhenotyper::phenotype()
 		}
 		else
 		{
-			cout << "Opened " << imageFilename << endl;
+			//cout << "---" << endl << "Opened " << imageFilename << endl;
+			cout << "---" << endl << "Opened: \t" << filename << endl;
 			PlantPhenotyper::plantModeler.processImage(image, filename);
 		}
 	}

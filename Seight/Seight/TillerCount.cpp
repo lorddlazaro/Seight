@@ -73,7 +73,7 @@ int TillerCount::countTillers(Mat edge, Mat segmented){
         }
     }
     
-    printf("Tiller count is: %d\n", tiller);
+    printf("Tiller Count: \t%d\n", tiller);
 
 	return tiller;
 }

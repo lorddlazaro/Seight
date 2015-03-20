@@ -10,7 +10,7 @@ using namespace std;
 void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 {
     ofstream myfile;
-    
+
 	//PERFORM PREPROCESSING
     //Mat correctedImage = PlantModeler::correction->perform(image);
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
@@ -19,18 +19,19 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
     
 	//GET TILLER COUNT AND SAVE
-	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\tillerResults.txt"), ios_base::app);
     int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
-    myfile << tiller << "\n";
+	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\tillerResults.csv"), ios_base::app);
+    myfile << filename + "," << tiller << "\n";
     myfile.close();
 
 	//GET HEIGHT AND SAVE
-	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\heightResults.txt"), ios_base::app);
+	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\heightResults.csv"), ios_base::app);
     double height = PlantModeler::measureHeight(skeleton);
-    myfile << height << "\n";
+	myfile << filename + "," << height << "\n";
     myfile.close();
 
 	//SAVE PREPROCESSING IMAGES
+	cout << "Saving Preprocessed images..." << endl;
 	string hsvDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\HSV-Results\\");
     string imageFile = "";
     imageFile.append(hsvDirectory);
@@ -53,9 +54,6 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, skeleton);
-
-
-    //cout << "done processing" << endl;
 }
 
 PlantModeler::PlantModeler()
@@ -154,7 +152,7 @@ double PlantModeler::measureHeight(Mat skeleton)
     
     height = distance / 9; //convert to cm
     
-    cout << "height " << height << endl;
+    cout << "Height: \t" << height << endl;
     
     return height;
 }

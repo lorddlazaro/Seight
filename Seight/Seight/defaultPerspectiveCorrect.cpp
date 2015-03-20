@@ -18,4 +18,5 @@ defaultPerspectiveCorrect::~defaultPerspectiveCorrect()
 Mat defaultPerspectiveCorrect::perform(Mat image)
 {
 	//cout << "performing Perspective Correction" << endl;
+	return image;
 }

@@ -42,6 +42,7 @@ private:
     TillerCount *tillerCount;
     //int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(Mat skeleton); //Update return type and parameters based on what is needed
+
     
 public:
     PlantModeler();
