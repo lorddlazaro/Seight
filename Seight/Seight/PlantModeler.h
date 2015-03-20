@@ -50,10 +50,20 @@ public:
     {
         APPROACH_A, APPROACH_B, APPROACH_C //rename to more descriptive identifiers
     };
+	static string getApproachString(Approach approach)
+	{
+		switch (approach)
+		{
+			case APPROACH_A: return "APPROACH_A"; break;
+			case APPROACH_B: return "APPROACH_A"; break;
+			case APPROACH_C: return "APPROACH_A"; break;
+			default: return "Approach Name Default"; break;
+		}
+	}
     void processImage(Mat image, string name); //PhenotypicData
     static PlantModeler createApproach(Approach approach)
     {
-        cout << "in create approach" << endl;
+		cout << "Creating Approach:" << getApproachString(approach) << endl;
         
         PlantModeler *plantModeler = new PlantModeler;
         switch (approach)
@@ -66,7 +76,6 @@ public:
                 plantModeler->skeletonization = new defaultSkeletonize;
                 //plantModeler->structure = new PlantStructure;
                 plantModeler->tillerCount = new TillerCount;
-                cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:
                 break;
