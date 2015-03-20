@@ -1,6 +1,5 @@
-#ifndef PlantPhenotyper_H
-#define PlantPhenotyper_H
 
+#include <string>
 #include "PlantModeler.h"
 
 class PlantPhenotyper
@@ -11,6 +10,5 @@ public:
 	PlantPhenotyper();
 	~PlantPhenotyper();
 	int phenotype();
+	static string getExeDir();
 };
-
-#endif

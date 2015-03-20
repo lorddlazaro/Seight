@@ -8,6 +8,8 @@
 #include <windows.h>
 #include <string>
 
+#define DEBUG_MODE = 1;
+
 using namespace cv;
 using namespace std;
 
@@ -17,32 +19,17 @@ PlantPhenotyper::PlantPhenotyper()
 	PlantPhenotyper::plantModeler = PlantModeler::createApproach(PlantModeler::APPROACH_A);
 }
 
-
 PlantPhenotyper::~PlantPhenotyper()
 {
-}
-
-std::string GetExeFileName()
-{
-	char buffer[MAX_PATH];
-	GetModuleFileNameA(NULL, buffer, MAX_PATH);
-	return std::string(buffer);
-}
-
-std::string GetExePath()
-{
-	std::string f = GetExeFileName();
-	return f.substr(0, f.find_last_of("\\/"));
 }
 
 int PlantPhenotyper::phenotype()
 {
 	Mat image;
-	//string directory = "D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/Resized/";
-	string directory = GetExePath();
+	string directory = getExeDir();
 	directory.resize(directory.size() - 6);
 	directory.append("\\Seight\\image\\Resized\\");
-	cout << "my directory is " << GetExePath() << "\n";
+	cout << "my directory is " << getExeDir() << "\n";
 	string imageNameConvention = "IR64-0";
 	string fileExtension = ".JPG";
 	string filename = "";
@@ -78,4 +65,20 @@ int PlantPhenotyper::phenotype()
 	}
 
 	return 1;
+}
+
+string PlantPhenotyper::getExeDir()
+{
+	//Get Exe File Name
+	char buffer[MAX_PATH];
+	GetModuleFileNameA(NULL, buffer, MAX_PATH);
+
+	//Get Exe Path
+	std::string f = std::string(buffer);
+	string directory = f.substr(0, f.find_last_of("\\/"));
+
+	//go out of debug folder
+	cout << directory << endl;
+	directory.resize(directory.size() - 6); //"\debug" is 6 characters
+	return directory;
 }
