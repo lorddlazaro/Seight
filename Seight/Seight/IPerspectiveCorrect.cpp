@@ -2,6 +2,7 @@
 #include "IPerspectiveCorrect.h"
 
 
+
 IPerspectiveCorrect::IPerspectiveCorrect()
 {
 }
@@ -11,7 +12,7 @@ IPerspectiveCorrect::~IPerspectiveCorrect()
 {
 }
 
-void IPerspectiveCorrect::perform()
+Mat IPerspectiveCorrect::perform(Mat image)
 {
-
+	return image;
 }

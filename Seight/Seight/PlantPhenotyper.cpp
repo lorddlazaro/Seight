@@ -63,7 +63,6 @@ int PlantPhenotyper::phenotype()
 			cout << "Opened " << imageFilename << endl;
 			PlantPhenotyper::plantModeler.processImage(image, filename);
 		}
-		
 	}
 
 	return 1;

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlantModeler.h"
+#include "PlantPhenotyper.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -10,39 +11,50 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 {
     ofstream myfile;
     
-    
-    //cout << "processing image" << endl;
-    PlantModeler::correction->perform();
+	//PERFORM PREPROCESSING
+    //Mat correctedImage = PlantModeler::correction->perform(image);
     Mat segmentedImage = PlantModeler::segmentation->perform(image);
-    PlantModeler::imageFiltering->perform(segmentedImage);
+    //Mat filteredImage = PlantModeler::imageFiltering->perform(segmentedImage);
     Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
-    myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/tillerResults.txt", ios_base::app);
+    
+	//GET TILLER COUNT AND SAVE
+	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\tillerResults.txt"), ios_base::app);
     int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
     myfile << tiller << "\n";
     myfile.close();
-    myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/heightResults.txt", ios_base::app);
+
+	//GET HEIGHT AND SAVE
+	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\heightResults.txt"), ios_base::app);
     double height = PlantModeler::measureHeight(skeleton);
     myfile << height << "\n";
     myfile.close();
-    string hsvDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/HSV/";
+
+	//SAVE PREPROCESSING IMAGES
+	string hsvDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\HSV-Results\\");
     string imageFile = "";
     imageFile.append(hsvDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, segmentedImage);
-    string edgeDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Edge/";
+
+
+	string edgeDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\Edge-Results\\");
     imageFile = "";
     imageFile.append(edgeDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, edge);
-    string skeletonDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Skeleton/";
+
+
+	string skeletonDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\Skeleton-Results\\");
     imageFile = "";
     imageFile.append(skeletonDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, skeleton);
+
+
     //cout << "done processing" << endl;
 }
 
