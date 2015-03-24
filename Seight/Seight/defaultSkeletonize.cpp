@@ -19,7 +19,7 @@ Mat defaultSkeletonize::perform(Mat image)
     
     Mat bw;
     cvtColor(image, bw, CV_BGR2GRAY);
-    threshold(bw, bw, 10, 255, CV_THRESH_BINARY);
+    threshold(bw, bw, 1, 255, CV_THRESH_BINARY);
     
     thinning(bw);
     //bitwise_not(bw, bw);
@@ -80,7 +80,7 @@ void defaultSkeletonize::thinning(Mat& im)
         cv::absdiff(im, prev, diff);
         im.copyTo(prev);
         //cout << countNonZero(diff) << endl;
-    } while (cv::countNonZero(diff) > 2000);
+    } while (cv::countNonZero(diff) > 10);
     
     im *= 255;
 }

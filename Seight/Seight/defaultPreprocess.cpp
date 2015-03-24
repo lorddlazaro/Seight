@@ -31,8 +31,8 @@ Mat defaultPreprocess::perform(Mat raw_image)
 	split(hsv, channels);
 
 	Mat result;
-	equalizeHist(channels[0], channels[0]);
-	//equalizeHist(channels[1], channels[1]);
+	//equalizeHist(channels[0], channels[0]);
+	equalizeHist(channels[1], channels[1]);
 	//equalizeHist(channels[2], channels[2]);
 	merge(channels, hsv);
 	cvtColor(hsv, result, CV_HSV2BGR);
