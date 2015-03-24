@@ -95,6 +95,7 @@
     <ClInclude Include="defaultSegment.h" />
     <ClInclude Include="defaultSkeletonize.h" />
     <ClInclude Include="EuclideanHeightMeasure.h" />
+    <ClInclude Include="HeightMeasurer.h" />
     <ClInclude Include="HSVSegment.h" />
     <ClInclude Include="IEdgeDetect.h" />
     <ClInclude Include="IFilter.h" />
@@ -126,6 +127,7 @@
     <ClCompile Include="defaultSegment.cpp" />
     <ClCompile Include="defaultSkeletonize.cpp" />
     <ClCompile Include="EuclideanHeightMeasure.cpp" />
+    <ClCompile Include="HeightMeasurer.cpp" />
     <ClCompile Include="HSVSegment.cpp" />
     <ClCompile Include="IEdgeDetect.cpp" />
     <ClCompile Include="IFilter.cpp" />

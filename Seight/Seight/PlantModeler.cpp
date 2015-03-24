@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "PlantModeler.h"
+#include "HeightMeasurer.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -11,6 +12,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 {
     ofstream myfile;
     
+	HeightMeasurer* heightMeasurer = new HeightMeasurer;
     
     //cout << "processing image" << endl;
     //PlantModeler::correction->perform();
@@ -32,7 +34,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     myfile.close();
 
     myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/heightResults.txt", ios_base::app);
-    double height = PlantModeler::measureHeight(skeleton);
+	double height = heightMeasurer->measureHeight(skeleton);
     myfile << height << "\n";
     myfile.close();/**/
 
@@ -56,6 +58,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, skeleton);
+
     //cout << "done processing" << endl;*/
 }
 

@@ -105,6 +105,9 @@
     <ClInclude Include="YCrCbSegment.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="HeightMeasurer.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -192,6 +195,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="YCrCbSegment.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="HeightMeasurer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
