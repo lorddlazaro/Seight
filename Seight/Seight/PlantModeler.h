@@ -1,11 +1,12 @@
 #ifndef PlantModeler_H
 #define PlantModeler_H
 
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "PhenotypicData.h"
 
 #include "IPreprocess.h"
 #include "defaultPreprocess.h"
+#include "normalizeAdjustBrightnessAndContrastPreprocess.h"
 
 #include "ISegment.h"
 #include "defaultSegment.h"
@@ -30,6 +31,7 @@
 
 #include "IHeightMeasure.h"
 #include "EuclideanHeightMeasure.h"
+#include "HeightMeasurer.h"
 
 #include "TillerCount.h"
 
@@ -65,8 +67,8 @@ public:
 		switch (approach)
 		{
 			case APPROACH_A: return "APPROACH_A"; break;
-			case APPROACH_B: return "APPROACH_A"; break;
-			case APPROACH_C: return "APPROACH_A"; break;
+			case APPROACH_B: return "APPROACH_B"; break;
+			case APPROACH_C: return "APPROACH_C"; break;
 			default: return "Approach Name Default"; break;
 		}
 	}
@@ -97,6 +99,13 @@ public:
 				plantModeler->heightMeasure = new EuclideanHeightMeasure;
                 break;
             case PlantModeler::APPROACH_C:
+                plantModeler->correction = new defaultPerspectiveCorrect;
+                plantModeler->preprocess = new normalizeAdjustBrightnessAndContrastPreprocess;
+                plantModeler->segmentation = new HSVSegment;
+                plantModeler->edgeDetection = new defaultEdgeDetect;
+                plantModeler->tillerCount = new TillerCount;
+                plantModeler->skeletonization = new defaultSkeletonize;
+                plantModeler->heightMeasure = new HeightMeasurer;
                 break;
         }
         

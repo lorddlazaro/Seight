@@ -15,6 +15,7 @@ public:
 	HSVSegment();
 	~HSVSegment();
 	Mat perform(Mat image);
+    void setValues(vector<int> values);
 };
 
 #endif

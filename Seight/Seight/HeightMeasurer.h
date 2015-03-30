@@ -1,6 +1,8 @@
 #pragma once
 
-#include "stdafx.h"
+#include "IHeightMeasure.h" 
+
+//#include "stdafx.h"
 #include <stdio.h>
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
@@ -11,14 +13,17 @@
 using namespace cv;
 using namespace std;
 
-class HeightMeasurer
+class HeightMeasurer : public IHeightMeasure
 {
 public:
 	HeightMeasurer();
 	~HeightMeasurer();
+    float perform(Mat image);
 	int measureHeight(Mat image);
-	Point getTopPixel(Mat image);
-	void markPixel(Mat image, Point point);
-	Point getNextPixel(Mat image, Point currentPixel, vector<Point> previousPixels);
+	Point getTopPixel();
+	void markPixel(Point point);
+	Point getNextPixel(Point currentPixel, vector<Point> previousPixels);
+    double computeAllEuclideanDistance(vector<Point> tiller);
+    Mat getMarkedImage();
 };
 

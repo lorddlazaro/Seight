@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include <iostream>
 #include "EuclideanHeightMeasure.h"
 #include <vector>
@@ -18,9 +18,6 @@ EuclideanHeightMeasure::~EuclideanHeightMeasure()
 float EuclideanHeightMeasure::perform(Mat image)
 {
 	cout << "in EuclideanHeightMeasure perform" << endl;
-
-	double cmConversion = 7;
-	double height = 0;
 
 	int b, g, r;
 	
@@ -109,11 +106,11 @@ float EuclideanHeightMeasure::perform(Mat image)
 	//imshow("COLOR", skeleton);
 	//waitKey(0);
 	double length = EuclideanHeightMeasure::getDistance(lowx - highx, lowy - highy);
-	height = length / cmConversion; //convert to cm
+	//height = length / cmConversion; //convert to cm
 
-	cout << "height: " << height << endl;
+	//cout << "height: " << height << endl;
 
-	return height;
+	return length;
 }
 
 float EuclideanHeightMeasure::getDistance(float x, float y){

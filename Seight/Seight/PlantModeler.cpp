@@ -1,7 +1,8 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "PlantModeler.h"
 #include "HeightMeasurer.h"
 #include "PlantPhenotyper.h"
+#include "PixelConverter.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -13,7 +14,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 {
     ofstream myfile;
 
-	HeightMeasurer* heightMeasurer = new HeightMeasurer;
+	//HeightMeasurer* heightMeasurer = new HeightMeasurer;
 
 
 	//PERFORM PREPROCESSING
@@ -31,8 +32,12 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     myfile.close();
     
 	//GET HEIGHT AND SAVE
+    PixelConverter* pixelConverter = new PixelConverter;
+    double length = PlantModeler::heightMeasure->perform(skeleton);
+    Mat markedSkeleton = PlantModeler::heightMeasure->getMarkedImage();
+    double height = pixelConverter->convertImagePixelstoCentimeter(image, length);
+    cout << "Height " << height << endl;
 	myfile.open(PlantPhenotyper::getExeDir().append("/Seight/data/heightResults.csv"), ios_base::app);
-	double height = heightMeasurer->measureHeight(skeleton);
 	myfile << filename + "," << height << "\n";
     myfile.close();
 
@@ -65,6 +70,13 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, skeleton);
+    
+    string markedSkeletonDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/markedSkeleton/");
+    imageFile = "";
+    imageFile.append(markedSkeletonDirectory);
+    imageFile.append(filename);
+    cout << imageFile << endl;
+    imwrite(imageFile, heightMeasure->getMarkedImage());
 }
 
 PlantModeler::PlantModeler()

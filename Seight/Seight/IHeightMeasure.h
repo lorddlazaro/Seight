@@ -15,6 +15,7 @@ public:
 	IHeightMeasure();
 	~IHeightMeasure();
 	virtual float perform(Mat image);
+    virtual Mat getMarkedImage();
 };
 
-#endif//
+#endif

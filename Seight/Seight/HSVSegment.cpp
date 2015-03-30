@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "HSVSegment.h"
 
 using namespace std;
@@ -13,6 +13,23 @@ HSVSegment::~HSVSegment()
 {
 }
 
+int minH = 25;
+int minS = 215;
+int minV = 55;
+int maxH = 55;
+int maxS = 255;
+int maxV = 255;
+
+void HSVSegment::setValues(vector<int> values)
+{
+    minH = values[0];
+    minS = values[1];
+    minV = values[2];
+    maxH = values[3];
+    maxS = values[4];
+    maxV = values[5];
+}
+
 Mat HSVSegment::perform(Mat image)
 {
 	//imshow("raw", image);
@@ -24,14 +41,16 @@ Mat HSVSegment::perform(Mat image)
 	//hsv1=30,50,50 | 115,255,50
 	//hsv2=30,70,70 | 80,250,255
 	//hsv3=
-	
-	int minH = 25;
-	int minS = 215;
-	int minV = 55;
-	int maxH = 55;
-	int maxS = 255;
-	int maxV = 255;
-
+    
+    vector<int> values;
+    values.push_back(15);//minH
+    values.push_back(35);//minS
+    values.push_back(40);//minV
+    values.push_back(70);//maxH
+    values.push_back(250);//maxS
+    values.push_back(240);//maxV
+    
+    setValues(values);
 	//imshow("HSV", hsvImage);
 
 	//define range of green color in HSV

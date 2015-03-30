@@ -1,4 +1,4 @@
-#include "stdafx.h"
+//#include "stdafx.h"
 #include "defaultSkeletonize.h"
 #include <iostream>
 
@@ -29,6 +29,13 @@ Mat defaultSkeletonize::perform(Mat image)
     
     //imwrite("D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/result_ZhangSuen.JPG", bw, vector < int > {0});
     //imwrite("/Users/pauletteconstantino/THESIS/structure3.JPG", bw);
+    
+    
+    Mat morphed;
+    Mat str_el = getStructuringElement(MORPH_RECT, Size(5,5));
+    
+    morphologyEx(bw, morphed, MORPH_OPEN, str_el);
+    morphologyEx(bw, morphed, MORPH_CLOSE, str_el);
     
     return bw;
 }
@@ -80,7 +87,7 @@ void defaultSkeletonize::thinning(Mat& im)
         cv::absdiff(im, prev, diff);
         im.copyTo(prev);
         //cout << countNonZero(diff) << endl;
-    } while (cv::countNonZero(diff) > 10);
+    } while (cv::countNonZero(diff) > 0);
     
     im *= 255;
 }
