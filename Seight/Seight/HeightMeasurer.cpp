@@ -69,8 +69,8 @@ double HeightMeasurer::computeAllEuclideanDistance(vector<Point> tiller)
         if(i+1 != tiller.size())
         {
             double distance = 0;
-            int x = tiller[i].x;
-            int y = tiller[i].y;
+            int x = abs(tiller[i].x - tiller[i+1].x);
+            int y = abs(tiller[i].y - tiller[i+1].y);
             distance = pow(x, 2) + pow(y, 2);
             distance = sqrt(distance);
             height += distance;
