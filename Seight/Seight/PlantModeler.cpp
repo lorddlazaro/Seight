@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "PlantModeler.h"
 #include "HeightMeasurer.h"
+#include "PlantPhenotyper.h"
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -11,55 +12,60 @@ using namespace cv;
 void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 {
     ofstream myfile;
-    
+
 	HeightMeasurer* heightMeasurer = new HeightMeasurer;
-    
-    //cout << "processing image" << endl;
-    //PlantModeler::correction->perform();
+
+
+	//PERFORM PREPROCESSING
+	//Mat correctedImage = PlantModeler::correction->perform(image);
 	Mat preprocessedImage = PlantModeler::preprocess->perform(image);
-    Mat segmentedImage = PlantModeler::segmentation->perform(preprocessedImage);
-	Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
+	Mat segmentedImage = PlantModeler::segmentation->perform(preprocessedImage);
+    //Mat filteredImage = PlantModeler::imageFiltering->perform(segmentedImage);
+    Mat edge = PlantModeler::edgeDetection->perform(segmentedImage);
     Mat skeleton = PlantModeler::skeletonization->perform(segmentedImage);
     
-	string histDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/EqHist/";
+	//GET TILLER COUNT AND SAVE
+    int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
+	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\tillerResults.csv"), ios_base::app);
+    myfile << filename + "," << tiller << "\n";
+    myfile.close();
+    
+	//GET HEIGHT AND SAVE
+	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\heightResults.csv"), ios_base::app);
+	double height = heightMeasurer->measureHeight(skeleton);
+	myfile << filename + "," << height << "\n";
+    myfile.close();
+
+	//SAVE PREPROCESSING IMAGES
+	cout << "Saving Preprocessed images..." << endl;
+	string hsvDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\HSV-Results\\");
+    string imageFile = "";
+    imageFile.append(hsvDirectory);
+    imageFile.append(filename);
+    cout << imageFile << endl;
+    imwrite(imageFile, segmentedImage);
+
+
+	string histDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\EqHist\\");
 	string imageFile = "";
 	imageFile.append(histDirectory);
 	imageFile.append(filename);
 	cout << imageFile << endl;
 	imwrite(imageFile, preprocessedImage);
 
-	/**/myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/tillerResults.txt", ios_base::app);
-    int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
-    myfile << tiller << "\n";
-    myfile.close();
-
-    myfile.open("D:/De La Salle University/Work/Programming/Seight/Seight/Seight/heightResults.txt", ios_base::app);
-	double height = heightMeasurer->measureHeight(skeleton);
-    myfile << height << "\n";
-    myfile.close();/**/
-
-    string hsvDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/HSV/";
-    imageFile = "";
-    imageFile.append(hsvDirectory);
-    imageFile.append(filename);
-    cout << imageFile << endl;
-    imwrite(imageFile, segmentedImage);
-	/**/
-	string edgeDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Edge/";
+	string edgeDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\Edge-Results\\");
     imageFile = "";
     imageFile.append(edgeDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, edge);
-    
-	string skeletonDirectory = "D:/DE LA SALLE UNIVERSITY/Work/Programming/Seight/Seight/Seight/image/Skeleton/";
+
+	string skeletonDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\Skeleton-Results\\");
     imageFile = "";
     imageFile.append(skeletonDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, skeleton);
-
-    //cout << "done processing" << endl;*/
 }
 
 PlantModeler::PlantModeler()
@@ -156,7 +162,11 @@ double PlantModeler::measureHeight(Mat skeleton)
     
     height = distance / 9; //convert to cm
     
+<<<<<<< HEAD
     cout << "height: " << height << endl;
+=======
+    cout << "Height: \t" << height << endl;
+>>>>>>> dev
     
     return height;
 }

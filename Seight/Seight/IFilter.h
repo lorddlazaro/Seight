@@ -13,7 +13,7 @@ class IFilter
 public:
 	IFilter();
 	~IFilter();
-	virtual void perform(Mat img);
+	virtual Mat perform(Mat img);
 };
 
 #endif

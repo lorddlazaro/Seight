@@ -51,6 +51,7 @@ private:
 	IHeightMeasure *heightMeasure;
     //int countTiller(Mat image); //Update return type and parameters based on what is needed
     double measureHeight(Mat skeleton); //Update return type and parameters based on what is needed
+
     
 public:
     PlantModeler();
@@ -59,10 +60,20 @@ public:
     {
         APPROACH_A, APPROACH_B, APPROACH_C //rename to more descriptive identifiers
     };
+	static string getApproachString(Approach approach)
+	{
+		switch (approach)
+		{
+			case APPROACH_A: return "APPROACH_A"; break;
+			case APPROACH_B: return "APPROACH_A"; break;
+			case APPROACH_C: return "APPROACH_A"; break;
+			default: return "Approach Name Default"; break;
+		}
+	}
     void processImage(Mat image, string name); //PhenotypicData
     static PlantModeler createApproach(Approach approach)
     {
-        cout << "in create approach" << endl;
+		cout << "Creating Approach:" << getApproachString(approach) << endl;
         
         PlantModeler *plantModeler = new PlantModeler;
         switch (approach)
@@ -75,7 +86,6 @@ public:
                 plantModeler->tillerCount = new TillerCount;
 				plantModeler->skeletonization = new defaultSkeletonize;
 				plantModeler->heightMeasure = new EuclideanHeightMeasure;
-                cout << "in approach A" << endl;
                 break;
             case PlantModeler::APPROACH_B:
 				plantModeler->correction = new defaultPerspectiveCorrect; // change to some other perspective correct
@@ -85,7 +95,6 @@ public:
 				plantModeler->tillerCount = new TillerCount;
 				plantModeler->skeletonization = new defaultSkeletonize;
 				plantModeler->heightMeasure = new EuclideanHeightMeasure;
-				cout << "in approach B" << endl;
                 break;
             case PlantModeler::APPROACH_C:
                 break;

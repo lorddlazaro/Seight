@@ -17,65 +17,70 @@ PlantPhenotyper::PlantPhenotyper()
 	PlantPhenotyper::plantModeler = PlantModeler::createApproach(PlantModeler::APPROACH_A);
 }
 
-
 PlantPhenotyper::~PlantPhenotyper()
 {
-}
-
-std::string GetExeFileName()
-{
-	char buffer[MAX_PATH];
-	GetModuleFileNameA(NULL, buffer, MAX_PATH);
-	return std::string(buffer);
-}
-
-std::string GetExePath()
-{
-	std::string f = GetExeFileName();
-	return f.substr(0, f.find_last_of("\\/"));
 }
 
 int PlantPhenotyper::phenotype()
 {
 	Mat image;
-	//string directory = "D:/De La Salle University/Work/Programming/Seight/Seight/Seight/image/Resized/";
-	string directory = GetExePath();
-	directory.resize(directory.size() - 6);
-	directory.append("\\Seight\\image\\Resized\\");
-	cout << "my directory is " << GetExePath() << "\n";
-	string imageNameConvention = "IR64-0";
+	string directory = getExeDir();
+	directory.append("\\Seight\\data\\");
+	string datasetDirectory = "data_gathering_3\\";
+	directory.append(datasetDirectory);
+	string imageNameConvention = "IR64-";
 	string fileExtension = ".JPG";
 	string filename = "";
 	string imageFilename = "";
 	/*loop images to phenotype*/
 	for (int i = 1; i <= 24; i++)
 	{
-		imageFilename = "";
+		//SET FILE NAME
 		filename = "";
-		imageFilename.append(directory);
 		filename.append(imageNameConvention);
 		if (i < 10)
 		{
-			filename.append("0");
-			filename.append(to_string(i));
+			filename.append("00");  //IR64-00i
 		}
-		else
+		else if (10 <= i && i < 100)
 		{
-			filename.append(to_string(i));
+			filename.append("0"); //IR64-0i
 		}
+		filename.append(to_string(i));
 		filename.append(fileExtension);
+		//SET FULL FILENAME AND DIRECTORY
+		imageFilename = "";
+		imageFilename.append(directory);
 		imageFilename.append(filename);
-		image = imread(imageFilename/*"/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/IR64-009_NoRuler_Resize.JPG"*/, CV_LOAD_IMAGE_COLOR);   // Read the file
+		//READ IMAGE AND START PHENOTYPING
+		image = imread(imageFilename, CV_LOAD_IMAGE_COLOR);   // Read the file
 		if (!image.data)                           // Check for invalid input
 		{
 			cout << "Could not open or find the image: " << imageFilename << std::endl;
 		}
 		else
 		{
-			cout << "Opened " << i << endl;
+			//cout << "---" << endl << "Opened " << imageFilename << endl;
+			cout << "---" << endl << "Opened: \t" << filename << endl;
 			PlantPhenotyper::plantModeler.processImage(image, filename);
 		}
 	}
 
 	return 1;
+}
+
+string PlantPhenotyper::getExeDir()
+{
+	//Get Exe File Name
+	char buffer[MAX_PATH];
+	GetModuleFileNameA(NULL, buffer, MAX_PATH);
+
+	//Get Exe Path
+	std::string f = std::string(buffer);
+	string directory = f.substr(0, f.find_last_of("\\/"));
+
+	//go out of debug folder
+	//cout << directory << endl;
+	directory.resize(directory.size() - 6); //"\debug" is 6 characters
+	return directory;
 }

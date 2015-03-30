@@ -14,7 +14,7 @@ IFilter::~IFilter()
 {
 }
 
-void IFilter::perform(Mat image)
+Mat IFilter::perform(Mat image)
 {
-    //return image;
+    return image;
 }
