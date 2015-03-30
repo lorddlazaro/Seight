@@ -60,8 +60,8 @@ Mat HSVSegment::perform(Mat image)
 	Mat mask;
 	
 	inRange(hsvImage, green_min, green_max, mask);
-
-	//imshow("mask", mask);
+    
+    //imshow("mask", mask);
 
 	Mat result;
 	image.copyTo(result, mask);

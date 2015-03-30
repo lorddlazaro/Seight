@@ -34,8 +34,9 @@ int PlantPhenotyper::phenotype()
 	string fileExtension = ".PNG";
 	string filename = "";
 	string imageFilename = "";
-	/*loop images to phenotype*/
+    /*loop images to phenotype*/
 	for (int i = 1; i <= 30; i++)
+	for (int i = 1; i <= 3; i++)
 	{
 		//SET FILE NAME
 		filename = "";
@@ -73,24 +74,23 @@ int PlantPhenotyper::phenotype()
 
 string PlantPhenotyper::getExeDir()
 {
-	//Get Exe File Name
-	/* WINDOWS *
-    char buffer[MAX_PATH];
-    GetModuleFileNameA(NULL, buffer, MAX_PATH);
-
-	//Get Exe Path
-	std::string f = std::string(buffer);
-	string directory = f.substr(0, f.find_last_of("\\/"));
-    
+    //Get Exe File Name
+    /* WINDOWS *
+     char buffer[MAX_PATH];
+     GetModuleFileNameA(NULL, buffer, MAX_PATH);
+     //Get Exe Path
+     std::string f = std::string(buffer);
+     string directory = f.substr(0, f.find_last_of("\\/"));
+     
      directory.resize(directory.size() - 6); //"\debug" is 6 characters
-    **/
+     **/
     
     /* MAC */
     string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
     /**/
     
-	//go out of debug folder
-	//cout << directory << endl;
+    //go out of debug folder
+    //cout << directory << endl;
     
-	return directory;
+    return directory;
 }

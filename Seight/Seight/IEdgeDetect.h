@@ -12,9 +12,9 @@ using namespace cv;
 class IEdgeDetect
 {
 public:
-	IEdgeDetect();
-	~IEdgeDetect();
-	virtual Mat perform(Mat image);
+    IEdgeDetect();
+    ~IEdgeDetect();
+    virtual Mat perform(Mat image);
 };
 
 #endif
