@@ -47,7 +47,6 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
 
 
 	string histDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\EqHist\\");
-	string imageFile = "";
 	imageFile.append(histDirectory);
 	imageFile.append(filename);
 	cout << imageFile << endl;
@@ -161,12 +160,8 @@ double PlantModeler::measureHeight(Mat skeleton)
     distance = sqrt(distance);
     
     height = distance / 9; //convert to cm
-    
-<<<<<<< HEAD
-    cout << "height: " << height << endl;
-=======
+
     cout << "Height: \t" << height << endl;
->>>>>>> dev
     
     return height;
 }
