@@ -38,7 +38,7 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     double height = pixelConverter->convertImagePixelstoCentimeter(image, length);
     cout << "Height " << height << endl;
 	myfile.open(PlantPhenotyper::getExeDir().append("/Seight/data/heightResults.csv"), ios_base::app);
-	myfile << filename + "," << height << "\n";
+	myfile << filename + "," << length << "," << height << "\n";
     myfile.close();
 
 	//SAVE PREPROCESSING IMAGES

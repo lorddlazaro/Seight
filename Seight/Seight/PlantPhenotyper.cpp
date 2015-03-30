@@ -35,7 +35,7 @@ int PlantPhenotyper::phenotype()
 	string filename = "";
 	string imageFilename = "";
 	/*loop images to phenotype*/
-	for (int i = 1; i <= 24; i++)
+	for (int i = 1; i <= 30; i++)
 	{
 		//SET FILE NAME
 		filename = "";
