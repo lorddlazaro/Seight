@@ -1,7 +1,7 @@
 #ifndef IEdgeDetect_H
 #define IEdgeDetect_H
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <vector>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>

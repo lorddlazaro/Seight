@@ -26,19 +26,19 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     
 	//GET TILLER COUNT AND SAVE
     int tiller = PlantModeler::tillerCount->perform(edge, segmentedImage);
-	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\tillerResults.csv"), ios_base::app);
+	myfile.open(PlantPhenotyper::getExeDir().append("/Seight/data/tillerResults.csv"), ios_base::app);
     myfile << filename + "," << tiller << "\n";
     myfile.close();
     
 	//GET HEIGHT AND SAVE
-	myfile.open(PlantPhenotyper::getExeDir().append("\\Seight\\data\\heightResults.csv"), ios_base::app);
+	myfile.open(PlantPhenotyper::getExeDir().append("/Seight/data/heightResults.csv"), ios_base::app);
 	double height = heightMeasurer->measureHeight(skeleton);
 	myfile << filename + "," << height << "\n";
     myfile.close();
 
 	//SAVE PREPROCESSING IMAGES
 	cout << "Saving Preprocessed images..." << endl;
-	string hsvDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\HSV-Results\\");
+	string hsvDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/HSV-Results/");
     string imageFile = "";
     imageFile.append(hsvDirectory);
     imageFile.append(filename);
@@ -46,20 +46,20 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imwrite(imageFile, segmentedImage);
 
 
-	string histDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\EqHist\\");
+	string histDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/EqHist/");
 	imageFile.append(histDirectory);
 	imageFile.append(filename);
 	cout << imageFile << endl;
 	imwrite(imageFile, preprocessedImage);
 
-	string edgeDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\Edge-Results\\");
+	string edgeDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/Edge-Results/");
     imageFile = "";
     imageFile.append(edgeDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
     imwrite(imageFile, edge);
 
-	string skeletonDirectory = PlantPhenotyper::getExeDir().append("\\Seight\\data\\Skeleton-Results\\");
+	string skeletonDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/Skeleton-Results/");
     imageFile = "";
     imageFile.append(skeletonDirectory);
     imageFile.append(filename);
@@ -78,7 +78,7 @@ PlantModeler::~PlantModeler(){
 
 double PlantModeler::measureHeight(Mat skeleton)
 {
-    double pixelsIncm = 9;
+    //double pixelsIncm = 9;
     double height;
     double distance;
     int b, g, r;

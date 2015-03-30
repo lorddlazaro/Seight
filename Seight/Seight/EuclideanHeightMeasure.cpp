@@ -27,7 +27,7 @@ float EuclideanHeightMeasure::perform(Mat image)
 	//unsigned char *input = (unsigned char*)(image.data);
 	
 	
-	bool highestFound = false, lowestFound = false;
+    bool highestFound = false;//, lowestFound = false;
 	
 	int highx = 0, highy = 0, lowx = 0, lowy = 0;
 
@@ -77,8 +77,8 @@ float EuclideanHeightMeasure::perform(Mat image)
 	/* Define Plant Base Point
 	 * y = image height - 16 
 	 * x = image width / 2 */
-	int y = image.rows - 1;
-	int x = image.cols / 2;
+//	int y = image.rows - 1;
+//	int x = image.cols / 2;
 	/* x = image width / 2 */
 
 	/*travel skeleton*/
@@ -104,7 +104,7 @@ float EuclideanHeightMeasure::perform(Mat image)
 			}
 		}
 	}
-	/**/
+	**/
 
 	//imshow("COLOR", skeleton);
 	//waitKey(0);

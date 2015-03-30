@@ -38,7 +38,7 @@ int HeightMeasurer::measureHeight(Mat image)
 	cout << "Done!" << endl;
 	imwrite("E:/THESIS -Butil/Seightv2/Seightv2/images/heightImage/0.PNG", skeleton);
 
-	int heightPixel = tiller.size();
+	int heightPixel = int(tiller.size());
 	cout << heightPixel << endl;
 	height = heightPixel / cmConversion;
 	return height;
@@ -57,8 +57,6 @@ Point HeightMeasurer::getTopPixel(Mat image){
 			int g = pixel.val[1];
 			int r = pixel.val[2];
 			if (b == 255 && g == 255 && r == 255){
-				int highx = i;
-				int highy = j;
 				topPixel = Point(i, j);
 				highestFound = true;
 			}
@@ -104,7 +102,7 @@ Point HeightMeasurer::getNextPixel(Mat image, Point currentPixel, vector<Point> 
 	 g = image.at<Vec3b>(x, y - 1).val[1];
 	 r = image.at<Vec3b>(x, y - 1).val[2];
 	cout << b << " + " << g << " + " << r << endl;
-	/******/
+	******/
 
 	if (
 		(x + 1) != image.rows &&

@@ -17,4 +17,4 @@ public:
 	virtual float perform(Mat image);
 };
 
-#endif IHeightMeasure_H
+#endif//

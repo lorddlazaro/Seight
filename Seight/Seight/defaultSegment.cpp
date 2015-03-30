@@ -93,7 +93,7 @@ imshow("bg",back_ground);
 	imshow("result", result);
 
 	imwrite("image/result.JPG", result, vector < int > {0});
-	/**/
+	**/
 	return result;
 }
 
