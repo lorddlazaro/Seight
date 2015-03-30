@@ -26,10 +26,10 @@ int PlantPhenotyper::phenotype()
 	Mat image;
 	string directory = getExeDir();
 	directory.append("\\Seight\\data\\");
-	string datasetDirectory = "data_gathering_3\\";
+	string datasetDirectory = "current\\";
 	directory.append(datasetDirectory);
-	string imageNameConvention = "IR64-";
-	string fileExtension = ".JPG";
+	string imageNameConvention = "";
+	string fileExtension = ".PNG";
 	string filename = "";
 	string imageFilename = "";
 	/*loop images to phenotype*/
@@ -38,14 +38,14 @@ int PlantPhenotyper::phenotype()
 		//SET FILE NAME
 		filename = "";
 		filename.append(imageNameConvention);
-		if (i < 10)
-		{
-			filename.append("00");  //IR64-00i
-		}
-		else if (10 <= i && i < 100)
-		{
-			filename.append("0"); //IR64-0i
-		}
+		//if (i < 10)
+		//{
+		//	filename.append("00");  //IR64-00i
+		//}
+		//else if (10 <= i && i < 100)
+		//{
+		//	filename.append("0"); //IR64-0i
+		//}
 		filename.append(to_string(i));
 		filename.append(fileExtension);
 		//SET FULL FILENAME AND DIRECTORY
