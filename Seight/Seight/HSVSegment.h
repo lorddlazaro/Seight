@@ -17,4 +17,4 @@ public:
 	Mat perform(Mat image);
 };
 
-#endif HSVSegment_H
+#endif

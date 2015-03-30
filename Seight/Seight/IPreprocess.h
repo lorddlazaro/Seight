@@ -1,7 +1,7 @@
 #ifndef IPreprocess_H
 #define IPreprocess_H
 
-//#include "stdafx.h"
+////#include "stdafx.h"
 #include <vector>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
@@ -17,4 +17,4 @@ public:
 	virtual Mat perform(Mat image);
 };
 
-#endif IPreprocess_H
+#endif

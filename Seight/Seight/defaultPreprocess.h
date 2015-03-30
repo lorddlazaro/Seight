@@ -13,4 +13,4 @@ public:
 	Mat perform(Mat image);
 };
 
-#endif defaultPreprocess_H
+#endif

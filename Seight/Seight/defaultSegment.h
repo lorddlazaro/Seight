@@ -21,4 +21,4 @@ public:
 	void remove_contours(vector<vector<Point>>&contours, double cmin, double cmax);
 };
 
-#endif defaultSegment_H
+#endif

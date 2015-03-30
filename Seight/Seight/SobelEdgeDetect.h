@@ -19,4 +19,4 @@ public:
 	Mat sobelEdge(Mat bw);
 };
 
-#endif SobelEdgeDetect_H
+#endif

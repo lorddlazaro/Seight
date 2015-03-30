@@ -14,4 +14,4 @@ public:
 	Mat perform(Mat image);
 };
 
-#endif defaultEdgeDetect_H
+#endif

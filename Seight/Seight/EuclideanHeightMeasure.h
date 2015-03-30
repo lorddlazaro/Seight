@@ -14,4 +14,4 @@ public:
 	float getDistance(float x, float y);
 };
 
-#endif EuclideanHeightMeasure_H
+#endif

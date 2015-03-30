@@ -18,4 +18,4 @@ public:
 	Mat perform(Mat image);
 };
 
-#endif YCrCbSegment_H
+#endif

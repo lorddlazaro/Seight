@@ -15,4 +15,4 @@ public:
 	void thinningIteration(Mat& im, int iter);
 };
 
-#endif defaultSkeletonize_H
+#endif
