@@ -36,7 +36,8 @@ Mat defaultPreprocess::perform(Mat raw_image)
 	//equalizeHist(channels[2], channels[2]);
 	merge(channels, hsv);
 	cvtColor(hsv, result, CV_HSV2BGR);
-	//imshow("h", hsv);
+	
+    //imshow("h", hsv);
 	//imshow("im", image);
 	//imshow("r", result);
 	//waitKey(0);

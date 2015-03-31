@@ -1,11 +1,15 @@
-//#include "stdafx.h"
+<<<<<<< HEAD
+#include "stdafx.h"
+=======
+////#include "stdafx.h"
+>>>>>>> origin/master
 #include "PlantPhenotyper.h"
 #include "PlantModeler.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-//#include <windows.h>
+#include <windows.h>
 #include <string>
 
 #include <unistd.h>
@@ -36,7 +40,6 @@ int PlantPhenotyper::phenotype()
 	string imageFilename = "";
     /*loop images to phenotype*/
 	for (int i = 1; i <= 30; i++)
-	for (int i = 1; i <= 3; i++)
 	{
 		//SET FILE NAME
 		filename = "";
@@ -74,20 +77,23 @@ int PlantPhenotyper::phenotype()
 
 string PlantPhenotyper::getExeDir()
 {
-    //Get Exe File Name
-    /* WINDOWS *
-     char buffer[MAX_PATH];
-     GetModuleFileNameA(NULL, buffer, MAX_PATH);
-     //Get Exe Path
-     std::string f = std::string(buffer);
-     string directory = f.substr(0, f.find_last_of("\\/"));
-     
+	//Get Exe File Name
+	/* WINDOWS */
+    char buffer[MAX_PATH];
+    GetModuleFileNameA(NULL, buffer, MAX_PATH);
+
+	//Get Exe Path
+	std::string f = std::string(buffer);
+	string directory = f.substr(0, f.find_last_of("\\/"));
+    
      directory.resize(directory.size() - 6); //"\debug" is 6 characters
-     **/
+    /**/
     
     /* MAC */
-    string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
+    //string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
+    //string directory = "/Users/pauletteconstantino/THESIS/Seight/Seight/Seight";
     /**/
+
     
     //go out of debug folder
     //cout << directory << endl;

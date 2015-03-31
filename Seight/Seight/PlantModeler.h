@@ -1,7 +1,7 @@
 #ifndef PlantModeler_H
 #define PlantModeler_H
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "PhenotypicData.h"
 
 #include "IPreprocess.h"

@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "PlantModeler.h"
 #include "HeightMeasurer.h"
 #include "PlantPhenotyper.h"
@@ -35,16 +35,38 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     PixelConverter* pixelConverter = new PixelConverter;
     double length = PlantModeler::heightMeasure->perform(skeleton);
     Mat markedSkeleton = PlantModeler::heightMeasure->getMarkedImage();
+    string markedSkeletonDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/markedSkeleton/");
+    string imageFile = "";
+    imageFile.append(markedSkeletonDirectory);
+    imageFile.append(filename);
+    cout << imageFile << endl;
+    imwrite(imageFile, markedSkeleton);
+    double manualLength = -1;
+    string traced = PlantPhenotyper::getExeDir().append("/Seight/data/trace/").append(filename);
+    Mat manuallyTacedTiller = imread(traced);
+    if(!manuallyTacedTiller.data)
+    {
+        cout << "manually traced data " << traced << " not found" << endl;
+    }
+    else
+    {
+        cvtColor(manuallyTacedTiller, manuallyTacedTiller, CV_BGR2GRAY);
+        manualLength = PlantModeler::heightMeasure->perform(manuallyTacedTiller);
+    }
+    cout << "Manual Length : System Length \t\t" << manualLength << " : " << length << endl;
+    Mat dupe;
+    image.copyTo(dupe);
     double height = pixelConverter->convertImagePixelstoCentimeter(image, length);
-    cout << "Height " << height << endl;
+    double manualHeight = pixelConverter->convertImagePixelstoCentimeter(dupe, manualLength);
+    cout << "Manual Height : System Height \t\t" << manualHeight << " : " << height << endl;
 	myfile.open(PlantPhenotyper::getExeDir().append("/Seight/data/heightResults.csv"), ios_base::app);
-	myfile << filename + "," << length << "," << height << "\n";
+	myfile << filename + "," << manualLength << "," << manualHeight << "," << length << "," << height << "\n";
     myfile.close();
 
 	//SAVE PREPROCESSING IMAGES
 	cout << "Saving Preprocessed images..." << endl;
 	string hsvDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/HSV-Results/");
-    string imageFile = "";
+    imageFile = "";
     imageFile.append(hsvDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
@@ -69,14 +91,8 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(skeletonDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
+    bitwise_not(skeleton, skeleton);
     imwrite(imageFile, skeleton);
-    
-    string markedSkeletonDirectory = PlantPhenotyper::getExeDir().append("/Seight/data/markedSkeleton/");
-    imageFile = "";
-    imageFile.append(markedSkeletonDirectory);
-    imageFile.append(filename);
-    cout << imageFile << endl;
-    imwrite(imageFile, heightMeasure->getMarkedImage());
 }
 
 PlantModeler::PlantModeler()

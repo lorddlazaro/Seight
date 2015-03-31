@@ -1,7 +1,7 @@
 #ifndef ISegment_H
 #define ISegment_H
 
-//#include "stdafx.h"
+#include "stdafx.h"
 #include <vector>
 
 #include <opencv2/imgproc/imgproc.hpp>
