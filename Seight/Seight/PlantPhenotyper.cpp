@@ -1,11 +1,11 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "PlantPhenotyper.h"
 #include "PlantModeler.h"
 #include <opencv2/core/core.hpp>
 #include <opencv2/imgproc/imgproc.hpp>
 #include <opencv2/highgui/highgui.hpp>
 #include <iostream>
-//#include <windows.h>
+#include <windows.h>
 #include <string>
 
 #include <unistd.h>
@@ -74,7 +74,7 @@ int PlantPhenotyper::phenotype()
 string PlantPhenotyper::getExeDir()
 {
 	//Get Exe File Name
-	/* WINDOWS *
+	/* WINDOWS */
     char buffer[MAX_PATH];
     GetModuleFileNameA(NULL, buffer, MAX_PATH);
 
@@ -83,11 +83,11 @@ string PlantPhenotyper::getExeDir()
 	string directory = f.substr(0, f.find_last_of("\\/"));
     
      directory.resize(directory.size() - 6); //"\debug" is 6 characters
-    **/
-    
-    /* MAC */
-    string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
     /**/
+    
+    /* MAC *
+    string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
+    **/
     
 	//go out of debug folder
 	//cout << directory << endl;

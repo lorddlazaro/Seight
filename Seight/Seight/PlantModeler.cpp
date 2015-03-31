@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "PlantModeler.h"
 #include "HeightMeasurer.h"
 #include "PlantPhenotyper.h"

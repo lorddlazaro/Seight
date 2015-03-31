@@ -1,4 +1,4 @@
-//#include "stdafx.h"
+#include "stdafx.h"
 #include "HSVSegment.h"
 
 using namespace std;
