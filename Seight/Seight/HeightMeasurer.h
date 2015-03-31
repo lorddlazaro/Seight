@@ -19,7 +19,7 @@ public:
 	HeightMeasurer();
 	~HeightMeasurer();
     float perform(Mat image);
-	int measureHeight(Mat image);
+	float measureHeight(Mat image);
 	Point getTopPixel();
 	void markPixel(Point point);
 	Point getNextPixel(Point currentPixel, vector<Point> previousPixels);
