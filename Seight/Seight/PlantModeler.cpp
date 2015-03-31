@@ -54,8 +54,10 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
         manualLength = PlantModeler::heightMeasure->perform(manuallyTacedTiller);
     }
     cout << "Manual Length : System Length \t\t" << manualLength << " : " << length << endl;
+    Mat dupe;
+    image.copyTo(dupe);
     double height = pixelConverter->convertImagePixelstoCentimeter(image, length);
-    double manualHeight = pixelConverter->convertImagePixelstoCentimeter(image, manualLength);
+    double manualHeight = pixelConverter->convertImagePixelstoCentimeter(dupe, manualLength);
     cout << "Manual Height : System Height \t\t" << manualHeight << " : " << height << endl;
 	myfile.open(PlantPhenotyper::getExeDir().append("/Seight/data/heightResults.csv"), ios_base::app);
 	myfile << filename + "," << manualLength << "," << manualHeight << "," << length << "," << height << "\n";
@@ -89,9 +91,8 @@ void PlantModeler::processImage(Mat image, string filename) //PhenotypicData
     imageFile.append(skeletonDirectory);
     imageFile.append(filename);
     cout << imageFile << endl;
+    bitwise_not(skeleton, skeleton);
     imwrite(imageFile, skeleton);
-    
-    
 }
 
 PlantModeler::PlantModeler()

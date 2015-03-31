@@ -25,5 +25,6 @@ public:
 	Point getNextPixel(Point currentPixel, vector<Point> previousPixels);
     double computeAllEuclideanDistance(vector<Point> tiller);
     Mat getMarkedImage();
+    bool isWhite(int x, int y);
 };
 

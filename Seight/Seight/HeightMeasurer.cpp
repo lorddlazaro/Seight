@@ -13,7 +13,7 @@ HeightMeasurer::~HeightMeasurer()
 
 float HeightMeasurer::perform(Mat image)
 {
-    int height = measureHeight(image);
+    float height = measureHeight(image);
     return height;
 }
 
@@ -24,7 +24,7 @@ Mat HeightMeasurer::getMarkedImage()
     return skeleton;
 }
 
-int HeightMeasurer::measureHeight(Mat image)
+float HeightMeasurer::measureHeight(Mat image)
 {
 	cvtColor(image, skeleton, CV_GRAY2BGR);
 	vector<Point> tiller;
@@ -43,9 +43,15 @@ int HeightMeasurer::measureHeight(Mat image)
 		currentPixel = getNextPixel(currentPixel, tiller);
 		tiller.push_back(currentPixel);
 		markPixel(currentPixel);
+        //cout<<".";
 		
 	} while (!(currentPixel.x == 0 && currentPixel.y == 0) && currentPixel.x != image.rows - 1);
-	cout << "Done!" << endl;
+    tiller.pop_back();
+    cout <<endl;
+    cout << "Done!" << endl;
+    
+    cout << "markedPixel " << tiller.size() << endl;
+    
 	//imwrite("E:/THESIS -Butil/Seightv2/Seightv2/images/heightImage/0.PNG", skeleton);
     
     double heightPixel = 0.0;
@@ -56,6 +62,25 @@ int HeightMeasurer::measureHeight(Mat image)
     /*** GETTING HEIGHT BY EUCLIDEAN DISTANCE ***/
     heightPixel = computeAllEuclideanDistance(tiller);
 
+    int threshold = image.rows * .10;
+    if(heightPixel < threshold)
+    {
+        Mat dupe;
+        image.copyTo(dupe);
+        
+        cout <<  "til:" << tiller[tiller.size()-1].x << " cols:" << dupe.cols;
+        cout << " row:" << dupe.rows - tiller[tiller.size()-1].x << endl;
+        
+        Rect rect = Rect(0, tiller[tiller.size()-1].x + 1, dupe.cols, dupe.rows - (tiller[tiller.size()-1].x + 1));
+        
+        //image.cols-5,(image.rows - tiller[tiller.size()-1].x-5));
+        cout << "instantiated rect, ";
+        dupe = dupe(rect);
+        cout << "cropped dupe";
+        heightPixel = measureHeight(dupe);
+        cout << "just recursed"<<endl;
+    }
+    
 	return heightPixel;
 }
 
@@ -63,19 +88,22 @@ double HeightMeasurer::computeAllEuclideanDistance(vector<Point> tiller)
 {
     double height = 0.0;
     
-    cout << "tiller size" << tiller.size() << endl;
+    //cout << "tiller size" << tiller.size() << endl;
+    
     
     for (int i = 0; i < tiller.size(); i++) {
         if(i+1 != tiller.size())
         {
             double distance = 0;
-            int x = abs(tiller[i].x - tiller[i+1].x);
-            int y = abs(tiller[i].y - tiller[i+1].y);
+            int x = abs(tiller[i].x - tiller[i+1].x);// cout << "x" << x << endl;
+            int y = abs(tiller[i].y - tiller[i+1].y);// cout << "y" << y << endl;
             distance = pow(x, 2) + pow(y, 2);
             distance = sqrt(distance);
             height += distance;
+            //cout << "x:" << tiller[i].x << " y:" << tiller[i].y << "x:" << tiller[i+1].x << " y:" << tiller[i+1].y << " X:" << x << " Y:" << y << " distance:" << distance <<endl;
         }
     }
+    cout<< tiller.size() <<endl;
     cout << "Height ED: " << height << endl;
     return height;
 }
@@ -101,6 +129,30 @@ Point HeightMeasurer::getTopPixel(){
 	
 
 	return topPixel;
+}
+
+bool isBound(int x, int y)
+{
+    if(x < 0 || y <0 || x > skeleton.rows || y>skeleton.cols){
+        return false;
+    }
+    return true;
+}
+
+bool HeightMeasurer::isWhite(int x, int y)
+{
+    if (skeleton.at<Vec3b>(x, y).val[0] == 255 &&
+        skeleton.at<Vec3b>(x, y).val[1] == 255 &&
+        skeleton.at<Vec3b>(x, y).val[2] == 255)
+        return true;
+    else return false;
+}
+
+bool isLeft(int y)
+{
+    if (y < skeleton.cols/2)
+        return true;
+    return false;
 }
 
 Point HeightMeasurer::getNextPixel(Point currentPixel, vector<Point> previousPixels)
@@ -139,62 +191,259 @@ Point HeightMeasurer::getNextPixel(Point currentPixel, vector<Point> previousPix
 	 r = image.at<Vec3b>(x, y - 1).val[2];
 	cout << b << " + " << g << " + " << r << endl;
 	******/
+    bool isFound = false;
+    int i = 1;
+    int range = .01*skeleton.rows;
+    
+    if(isLeft(y))
+    {
+        while(!isFound && i<range)
+        {
+            int px = x + i;
+            
+            //check pivot
+            if (isBound(px,y) && isWhite(px, y))
+            {
+                // cout << " 1 " << endl;
+                nextPixel.x = px;
+                nextPixel.y = y;
+                isFound = true;
+            }
+            
+            
+            // check right from pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px,y+j) && isWhite(px, y+j))
+                    {
+                        nextPixel.x = px;
+                        nextPixel.y = y+j;
+                        isFound = true;
+                    }
+                }
+            }
+            
+            
+            //check left from pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px,y-j) && isWhite(px, y-j))
+                    {
+                        nextPixel.x = px;
+                        nextPixel.y = y-j;
+                        isFound = true;
+                    }
+                }
+            }
+            
+            
+            //check up from right of pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px-j,(y+i)) && isWhite(px-j,(y+i)))
+                    {
+                        nextPixel.x =px-j;
+                        nextPixel.y = (y+i);
+                        isFound = true;
+                    }
+                }
+            }
+            
+            //check up from left of pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px-j,(y-i)) && isWhite(px-j,(y-i)))
+                    {
+                        nextPixel.x =px-j;
+                        nextPixel.y = (y-i);
+                        isFound = true;
+                    }
+                }
+            }
+            i++;
+        }
+        
+//
+//            
+//            
+//            
+//            
+//            
+//            
+//            //bottom
+//            if ((x + i) != skeleton.rows && isWhite(x+i, y))
+//            {
+//                // cout << " 1 " << endl;
+//                nextPixel.x = x + i;
+//                nextPixel.y = y;
+//                isFound = true;
+//            }
+//            //right bottom
+//            else if ((y + i) != skeleton.cols && isWhite(x+i, y+i))
+//            {
+//                //cout << " 2 " << endl;
+//                nextPixel.x = x + i;
+//                nextPixel.y = y + i;
+//                isFound = true;
+//            }
+//            //left bottom
+//            else if (
+//                     (x + i) != skeleton.rows &&
+//                     (y - i) >= 0 && isWhite(x+i, y-i))
+//            {
+//                //cout << " 3 " << endl;
+//                nextPixel.x = x + i;
+//                nextPixel.y = y - i;
+//                isFound = true;
+//            }//right
+//            else if (
+//                     (y + i) != skeleton.cols && isWhite(x, y+i))
+//            {
+//                //cout << " 4 " << endl;
+//                nextPixel.x = x;
+//                nextPixel.y = y + i;
+//                isFound = true;
+//            }//left
+//            else if ((y - i) >= 0 && isWhite(x, y-i))
+//            {
+//                //cout << " 5 " << endl;
+//                nextPixel.x = x;
+//                nextPixel.y = y - i;
+//                isFound = true;
+//            }
+            
+        
 
-	if (
-		(x + 1) != skeleton.rows &&
-		skeleton.at<Vec3b>(x + 1, y).val[0] == 255 &&
-		skeleton.at<Vec3b>(x + 1, y).val[1] == 255 &&
-		skeleton.at<Vec3b>(x + 1, y).val[2] == 255)
-	{
-		// cout << " 1 " << endl;
-		nextPixel.x = x + 1;
-		nextPixel.y = y;
-	}
-	else if (
-		(x + 1) != skeleton.rows &&
-		(y + 1) != skeleton.cols &&
-		skeleton.at<Vec3b>(x + 1, y+1).val[0] == 255 &&
-		skeleton.at<Vec3b>(x + 1, y+1).val[1] == 255 &&
-		skeleton.at<Vec3b>(x + 1, y+1).val[2] == 255)
-	{
-		//cout << " 2 " << endl;
-		nextPixel.x = x + 1;
-		nextPixel.y = y + 1;
-	}
-	else if (
-		(x + 1) != skeleton.rows &&
-		(y - 1) >= 0 &&
-		skeleton.at<Vec3b>(x + 1, y - 1).val[0] == 255 &&
-		skeleton.at<Vec3b>(x + 1, y - 1).val[1] == 255 &&
-		skeleton.at<Vec3b>(x + 1, y - 1).val[2] == 255)
-	{
-		//cout << " 3 " << endl;
-		nextPixel.x = x + 1;
-		nextPixel.y = y - 1;
-	}
-	else if (
-		(y + 1) != skeleton.cols &&
-		skeleton.at<Vec3b>(x, y + 1).val[0] == 255 &&
-		skeleton.at<Vec3b>(x, y + 1).val[1] == 255 &&
-		skeleton.at<Vec3b>(x, y + 1).val[2] == 255)
-	{
-		//cout << " 4 " << endl;
-		nextPixel.x = x;
-		nextPixel.y = y + 1;
-	}
-	else if (
-		(y - 1) >= 0 &&
-		skeleton.at<Vec3b>(x, y - 1).val[0] == 255 &&
-		skeleton.at<Vec3b>(x, y - 1).val[1] == 255 &&
-		skeleton.at<Vec3b>(x, y - 1).val[2] == 255)
-	{
-		//cout << " 5 " << endl;
-		nextPixel.x = x;
-		nextPixel.y = y - 1;
-	}
+    }
+    else
+    {
+        while(!isFound && i<range){
+            int px = x + i;
+            
+            //check pivot
+            if (isBound(px,y) && isWhite(px, y))
+            {
+                // cout << " 1 " << endl;
+                nextPixel.x = px;
+                nextPixel.y = y;
+                isFound = true;
+            }
+            
+            
+            
+            //check left from pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px,y-j) && isWhite(px, y-j))
+                    {
+                        nextPixel.x = px;
+                        nextPixel.y = y-j;
+                        isFound = true;
+                    }
+                }
+            }
+            
+            // check right from pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px,y+j) && isWhite(px, y+j))
+                    {
+                        nextPixel.x = px;
+                        nextPixel.y = y+j;
+                        isFound = true;
+                    }
+                }
+            }
+            
+            
+            //check up from left of pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px-j,(y-i)) && isWhite(px-j,(y-i)))
+                    {
+                        nextPixel.x =px-j;
+                        nextPixel.y = (y-i);
+                        isFound = true;
+                    }
+                }
+            }
+            
+            //check up from right of pivot
+            if(!isFound)
+            {
+                for(int j=1; j<=i;j++)
+                {
+                    if(isBound(px-j,(y+i)) && isWhite(px-j,(y+i)))
+                    {
+                        nextPixel.x =px-j;
+                        nextPixel.y = (y+i);
+                        isFound = true;
+                    }
+                }
+            }
+            
+            i++;
+//            if ((x + i) != skeleton.rows && isWhite(x+i, y))
+//            {
+//                // cout << " 1 " << endl;
+//                nextPixel.x = x + i;
+//                nextPixel.y = y;
+//                isFound = true;
+//            }
+//            else if (
+//                     (x + i) != skeleton.rows &&
+//                     (y - i) >= 0 && isWhite(x+i, y-i))
+//            {
+//                //cout << " 3 " << endl;
+//                nextPixel.x = x + i;
+//                nextPixel.y = y - i;
+//                isFound = true;
+//            }
+//            else if ((y + i) != skeleton.cols && isWhite(x+i, y+i))
+//            {
+//                //cout << " 2 " << endl;
+//                nextPixel.x = x + i;
+//                nextPixel.y = y + i;
+//                isFound = true;
+//            }
+//            else if ((y - i) >= 0 && isWhite(x, y-i))
+//            {
+//                //cout << " 5 " << endl;
+//                nextPixel.x = x;
+//                nextPixel.y = y - i;
+//                isFound = true;
+//            }
+//            else if (
+//                     (y + i) != skeleton.cols && isWhite(x, y+i))
+//            {
+//                //cout << " 4 " << endl;
+//                nextPixel.x = x;
+//                nextPixel.y = y + i;
+//                isFound = true;
+//            }
+//            i++;
+        }
 
+    }
+    
 	return nextPixel;
 }
+
+
 
 void HeightMeasurer::markPixel(Point point)
 {
