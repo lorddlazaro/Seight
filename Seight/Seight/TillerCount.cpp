@@ -68,13 +68,23 @@ int TillerCount::getMode(std::vector<int> tillerData){
 }
 
 int TillerCount::countTillers(Mat edge, Mat segmented){
-	Rect rectROI = Rect(23, 380, 170, 75); //for new pictures
+	//Rect rectROI = Rect(23, 380, 170, 75); //for new pictures
 	//Rect rectROI = Rect(160, 515, 106, 106); //old ROI (for pictures with meter stick)
-	Mat edge_roi = edge(rectROI);
+	
+    int x_max = edge.cols;
+    int y_max = edge.rows;
+    int x_start = x_max/3; //3 because 1/3
+    int y_start = y_max-(y_max/8); //8 because 1/8
+    int width = x_max/3;
+    int length = (y_max/8)-1;
+    
+    Rect rectROI = Rect(x_start, y_start, width, length);
+    
+    Mat edge_roi = edge(rectROI);
 	Mat seg_roi = segmented(rectROI);
 
-	imwrite("image/ROI_edge.JPG", edge_roi);
-	imwrite("image/ROI_seg.JPG", seg_roi);
+	/*imwrite("/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/Seight/data/ROI_edge.JPG", edge_roi);
+	imwrite("/Users/pauletteconstantino/THESIS/Seight/Seight/Seight/Seight/data/ROI_seg.JPG", seg_roi);*/
 
 	int tillerSum = 0, tiller = 0;
 	int b, g, r;
@@ -106,7 +116,7 @@ int TillerCount::countTillers(Mat edge, Mat segmented){
 			}
 		}
 
-		cout << "tiller sum is: " << tillerSum << endl;
+		//cout << "tiller sum is: " << tillerSum << endl;
 		tillerData.push_back(tillerSum);
 		tillerSum = 0;
 	}

@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 #include "stdafx.h"
+=======
+////#include "stdafx.h"
+>>>>>>> origin/master
 #include "PlantPhenotyper.h"
 #include "PlantModeler.h"
 #include <opencv2/core/core.hpp>
@@ -34,7 +38,7 @@ int PlantPhenotyper::phenotype()
 	string fileExtension = ".PNG";
 	string filename = "";
 	string imageFilename = "";
-	/*loop images to phenotype*/
+    /*loop images to phenotype*/
 	for (int i = 1; i <= 30; i++)
 	{
 		//SET FILE NAME
@@ -85,12 +89,14 @@ string PlantPhenotyper::getExeDir()
      directory.resize(directory.size() - 6); //"\debug" is 6 characters
     /**/
     
-    /* MAC *
-    string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
-    **/
+    /* MAC */
+    //string directory = "/Users/elishajeremygonzales/Documents/Seight/Seight";
+    //string directory = "/Users/pauletteconstantino/THESIS/Seight/Seight/Seight";
+    /**/
+
     
-	//go out of debug folder
-	//cout << directory << endl;
+    //go out of debug folder
+    //cout << directory << endl;
     
-	return directory;
+    return directory;
 }

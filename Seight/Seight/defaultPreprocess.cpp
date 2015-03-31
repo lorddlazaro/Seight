@@ -20,12 +20,12 @@ Mat defaultPreprocess::perform(Mat raw_image)
 	cout << "default preprocessing" << endl;
 
 	//Crop Image
-	Rect rect_roi = Rect(0, 0, 240, 467);
-	Mat image = raw_image(rect_roi);
+	//Rect rect_roi = Rect(0, 0, 240, 467);
+	//Mat image = raw_image(rect_roi);
 
 	Mat hsv;
 	//imshow("image", image);
-	cvtColor(image, hsv, CV_BGR2HSV);
+	cvtColor(raw_image, hsv, CV_BGR2HSV);
 
 	vector<Mat> channels;
 	split(hsv, channels);
